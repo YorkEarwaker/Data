@@ -1,6 +1,10 @@
 # Data
-Data things; representation, transformation, pipelines, governance, 
+Data things; 
 
-ETL Extract, Transform, Load, structured data and smaller data volumes, better quality control and data governance
+* Representation,
+* Transformation,
+* Pipelines,
+* Storage,
+* Governance, 
 
-ELT Extract, Load, Transform, large data volumes, ustructured data, complex tranformations, reduced latecy and faster data laoding
+
