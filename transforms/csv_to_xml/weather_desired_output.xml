@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<weather_report>
+   <forecast>
+      <title></title>
+      <city></city>
+      <temperature></temperature>
+      <wind_direction></wind_direction>
+      <wind_speed></wind_speed>
+      <humidity></humidity>
+      <pressure></pressure>
+      <visibility></visibility>
+      <pub_date></pub_date>
+      <georss_point></georss_point>
+      <bbc_rss_code></bbc_rss_code>
+   </forecast>
+</weather_report>

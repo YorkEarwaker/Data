@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<weather_report>
+   <forecast>
+      <title>Friday - 17:00 BST: Not available 22Ã&#x82;Â°C (73Ã&#x82;Â°F)</title>
+      <city>London</city>
+      <temperature>22Ã&#x82;Â°C (73Ã&#x82;Â°F)</temperature>
+      <wind_direction>Direction not available</wind_direction>
+      <wind_speed>-- mph</wind_speed>
+      <humidity>50%</humidity>
+      <pressure>-- mb Not available</pressure>
+      <visibility>--</visibility>
+      <pub_date>Fri 20 Sep 2024 16:00:00 GMT</pub_date>
+      <georss_point>0.0 0.0</georss_point>
+      <bbc_rss_code>2643743</bbc_rss_code>
+   </forecast>
+   <forecast>
+      <title>Friday - 07:00 BST: Not available 16Ã&#x82;Â°C (62Ã&#x82;Â°F)</title>
+      <city>St Helier</city>
+      <temperature>16Ã&#x82;Â°C (62Ã&#x82;Â°F)</temperature>
+      <wind_direction>Direction not available</wind_direction>
+      <wind_speed>-- mph</wind_speed>
+      <humidity>-- %</humidity>
+      <pressure>-- mb</pressure>
+      <visibility>--</visibility>
+      <pub_date>Fri 20 Sep 2024 06:00:00 GMT</pub_date>
+      <georss_point>0.0 0.0</georss_point>
+      <bbc_rss_code>3042091</bbc_rss_code>
+   </forecast>
+   <forecast>
+      <title>Friday - 16:00 BST: Not available 17Ã&#x82;Â°C (64Ã&#x82;Â°F)</title>
+      <city>Cardiff</city>
+      <temperature>17Ã&#x82;Â°C (64Ã&#x82;Â°F)</temperature>
+      <wind_direction>Direction not available</wind_direction>
+      <wind_speed>-- mph</wind_speed>
+      <humidity>77%</humidity>
+      <pressure>-- mb Not available</pressure>
+      <visibility>--</visibility>
+      <pub_date>Fri 20 Sep 2024 15:00:00 GMT</pub_date>
+      <georss_point>0.0 0.0</georss_point>
+      <bbc_rss_code>2653822</bbc_rss_code>
+   </forecast>
+   <forecast>
+      <title>Friday - 17:00 BST: Not available 16Ã&#x82;Â°C (62Ã&#x82;Â°F)</title>
+      <city>Hull</city>
+      <temperature>16Ã&#x82;Â°C (62Ã&#x82;Â°F)</temperature>
+      <wind_direction>Direction not available</wind_direction>
+      <wind_speed>-- mph</wind_speed>
+      <humidity>89%</humidity>
+      <pressure>-- mb Not available</pressure>
+      <visibility>--</visibility>
+      <pub_date>Fri 20 Sep 2024 16:00:00 GMT</pub_date>
+      <georss_point>0.0 0.0</georss_point>
+      <bbc_rss_code>2645425</bbc_rss_code>
+   </forecast>
+   <forecast>
+      <title>Friday - 17:00 BST: Not available 17Ã&#x82;Â°C (62Ã&#x82;Â°F)</title>
+      <city>Manchester</city>
+      <temperature>17Ã&#x82;Â°C (62Ã&#x82;Â°F)</temperature>
+      <wind_direction>North Easterly</wind_direction>
+      <wind_speed>12mph</wind_speed>
+      <humidity>82%</humidity>
+      <pressure> 1023mb Falling</pressure>
+      <visibility>--</visibility>
+      <pub_date>Fri 20 Sep 2024 16:00:00 GMT</pub_date>
+      <georss_point>0.0 0.0</georss_point>
+      <bbc_rss_code>2643123</bbc_rss_code>
+   </forecast>
+   <forecast>
+      <title>Friday - 17:00 BST: Not available 15Ã&#x82;Â°C (59Ã&#x82;Â°F)</title>
+      <city>Belfast</city>
+      <temperature>15Ã&#x82;Â°C (59Ã&#x82;Â°F)</temperature>
+      <wind_direction>East North Easterly</wind_direction>
+      <wind_speed>9mph</wind_speed>
+      <humidity>82%</humidity>
+      <pressure> 1026mb Steady</pressure>
+      <visibility>--</visibility>
+      <pub_date>Fri 20 Sep 2024 16:00:00 GMT</pub_date>
+      <georss_point>0.0 0.0</georss_point>
+      <bbc_rss_code>2655984</bbc_rss_code>
+   </forecast>
+   <forecast>
+      <title>Friday - 17:00 BST: Not available 13Ã&#x82;Â°C (55Ã&#x82;Â°F)</title>
+      <city>Edinburgh</city>
+      <temperature>13Ã&#x82;Â°C (55Ã&#x82;Â°F)</temperature>
+      <wind_direction>Direction not available</wind_direction>
+      <wind_speed>-- mph</wind_speed>
+      <humidity>91%</humidity>
+      <pressure>-- mb Not available</pressure>
+      <visibility>--</visibility>
+      <pub_date>Fri 20 Sep 2024 16:00:00 GMT</pub_date>
+      <georss_point>0.0 0.0</georss_point>
+      <bbc_rss_code>2650225</bbc_rss_code>
+   </forecast>
+   <forecast>
+      <title>Friday - 17:00 BST: Not available 14Ã&#x82;Â°C (57Ã&#x82;Â°F)</title>
+      <city>Inverness</city>
+      <temperature>14Ã&#x82;Â°C (57Ã&#x82;Â°F)</temperature>
+      <wind_direction>North Easterly</wind_direction>
+      <wind_speed>5mph</wind_speed>
+      <humidity>82%</humidity>
+      <pressure> 1028mb Steady</pressure>
+      <visibility>--</visibility>
+      <pub_date>Fri 20 Sep 2024 16:00:00 GMT</pub_date>
+      <georss_point>0.0 0.0</georss_point>
+      <bbc_rss_code>2646088</bbc_rss_code>
+   </forecast>
+</weather_report>
