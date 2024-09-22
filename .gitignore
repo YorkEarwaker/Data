@@ -23,5 +23,6 @@
 hs_err_pid*
 replay_pid*
 
-# html output from xsl tranasformation
+# client side files, output from xsl tranasformation, or as curtesy to render page as expected
 *.html
+*.css
