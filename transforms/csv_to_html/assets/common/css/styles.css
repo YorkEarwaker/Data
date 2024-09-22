@@ -1,0 +1,72 @@
+/* styles.css */
+
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	background-color: #f0f0f0;
+}
+
+header {
+	background-color: #333;
+	color: #fff;
+	padding: 10-px;
+}
+
+nav ul {
+	list-style-type: none;
+	padding: 0;
+}
+
+nav li {
+	display: inline;
+	margin: 0;
+}
+
+nav a {
+	color: #fff;
+	text-decoration: none;
+}
+
+main {
+	padding: 20px;
+}
+
+section {
+	margin-bottom: 20px;
+}
+
+section h2 {
+	color: #333;
+}
+
+footer {
+	background-color: #333;
+	color: #fff;
+	text-align: center;
+	padding: 10p;
+	postion: fixed;
+	width: 100%;
+	bottom: 0;
+}
+
+#title {
+	background-color: #999;
+	font-weight: bold;
+	margin: 0;
+	padding: 5px;
+}
+
+#city {
+	background-color: #999;
+	font-weight: bold;
+	margin: 0;
+	padding: 5px;
+}
+
+#temperature {
+	background-color: #999;	
+	font-weight: bold;
+	margin: 0;
+	padding: 5px;
+}

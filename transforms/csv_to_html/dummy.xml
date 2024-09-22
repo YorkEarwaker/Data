@@ -1,0 +1,29 @@
+<?xml
+version="1.0" ?>
+<!--dummy-xml-doc for-saxon-input-requirement-->
+<!--the elements are needed, 
+but not these specific ones, 
+the elements and content, 
+are musically thememed and,
+have no bearing on the actual
+xslt logic or input or output-->
+<music-theory>
+<solfège>
+Do
+Re
+Me 
+Fa
+Sol
+La
+Ti
+</solfège>
+<diatonic-modes>
+Ionian
+Dorian
+Phrygian
+Lydian
+Mixolydian
+Aeolian
+Locrian
+</diatonic-modes>
+</music-theory>
