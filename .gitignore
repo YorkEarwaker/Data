@@ -24,4 +24,4 @@ hs_err_pid*
 replay_pid*
 
 # html output from xsl tranasformation
-.html
+*.html
