@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<!--
+After the w3schools exmaple on RDF
+-->
+
+<rdf:RDF
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:agw-inf="http://www.anthropogenicglobalwarming.com/info/">
+
+	<rdf:Description rdf:about="http://www.anthropogenicglobalwarming.com">
+		<agw-inf:title>Anthropogenic Global Warming</agw-inf:title>
+		<agw-inf:author>Citizen Scientist</agw-inf:author>
+	</rdf:Description>
+
+
+</rdf:RDF>

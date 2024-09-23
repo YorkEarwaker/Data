@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!--
+After the w3schools exmaple on RDF
+-->
+
+<rdf:RDF
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:fc="http://www.anthropogenicglobalwarming.com/uk/weather-report#">
+	
+	<rdf:Description
+		rdf:about="http://www.anthropogenicglobalwarming.com/uk/weather-report/2643743-20:09:2024:16:00:00">
+			<fc:title>Friday - 17:00 BST: Not available 22Ã&#x82;Â°C (73Ã&#x82;Â°F)</fc:title>
+			<fc:city>London</fc:city>
+			<fc:temperature>22Ã&#x82;Â°C (73Ã&#x82;Â°F)</fc:temperature>
+			<fc:wind_direction>Direction not available</fc:wind_direction>
+			<fc:wind_speed>-- mph</fc:wind_speed>
+			<fc:humidity>50%</fc:humidity>
+			<fc:pressure>-- mb Not available</fc:pressure>
+			<fc:visibility>--</fc:visibility>
+			<fc:pub_date>Fri 20 Sep 2024 16:00:00 GMT</fc:pub_date>
+			<fc:georss_point>0.0 0.0</fc:georss_point>
+			<fc:bbc_rss_code>2643743</fc:bbc_rss_code>
+	</rdf:Description>
+	
+	<rdf:Description
+		rdf:about="http://www.anthropogenicglobalwarming.com/uk/weather-report/3042091-20:09:2024:06:00:00">
+			<fc:title>Friday - 07:00 BST: Not available 16Ã&#x82;Â°C (62Ã&#x82;Â°F)</fc:title>
+			<fc:city>St Helier</fc:city>
+			<fc:temperature>16Ã&#x82;Â°C (62Ã&#x82;Â°F)</fc:temperature>
+			<fc:wind_direction>Direction not available</fc:wind_direction>
+			<fc:wind_speed>-- mph</fc:wind_speed>
+			<fc:humidity>-- %</fc:humidity>
+			<fc:pressure>-- mb</fc:pressure>
+			<fc:visibility>--</fc:visibility>
+			<fc:pub_date>Fri 20 Sep 2024 06:00:00 GMT</fc:pub_date>
+			<fc:georss_point>0.0 0.0</fc:georss_point>
+			<fc:bbc_rss_code>3042091</fc:bbc_rss_code>
+	</rdf:Description>
+	
+</rdf:RDF>

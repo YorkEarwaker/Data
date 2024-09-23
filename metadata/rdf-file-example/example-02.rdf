@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!--
+After the w3schools exmaple on RDF
+-->
+
+<rdf:RDF
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:agw-fqs="http://www.anthropogenicglobalwarming.com/fqs/">
+	
+	<rdf:Description rdf:about="http://www.anthropogenicglobalwarming.com">
+		<agw-fqs:author>Citizen Scientist</agw-fqs:author>
+		<agw-fqs:homepage>http://www.anthropogenicglobalwarming.com</agw-fqs:homepage>
+		<agw-fqs:ppm-co2-sol-message>Most climate scientists warn of need to reduce atmospheric CO2 below 350 ppm "Planet Health Report: AIR"</agw-fqs:ppm-co2-sol-message>
+		<agw-fqs:apiea-celsius-sol>1.5 C</agw-fqs:apiea-celsius-sol>
+	</rdf:Description>
+	
+</rdf:RDF>
+
+<!--
+rdf triple is subject predicate object spo
+of this rdf example
+
+Resource = subject = uri
+Property = predcate = author, homepage
+Property value = object = authors name, homepage uri
+
+Note; a property value can be a resource that is can be a uri
+Note; a property value can be a name or number or prose or other similar thing
+		name like; Citizen Scientist
+		number like; 1.5 C
+		number like; 419.3 ppm
+		prose like; Most climate scientists warn of need to reduce atmospheric CO2 below 350 ppm "Planet Health Report: AIR"
+
+three of the statements entailed in the rdf below; spo-01, spo-02, spo3
+
+spo-01: the author of http://www.anthropogenicglobalwarming.com/fqs is Citizen Scientist 
+subject is uri
+predicate is author
+object is authors name
+
+spo-02: the homepage of http://anthropogenicglobalwarming.com/fqs is http://www.anthropogenicglobalwarming.com
+subject is uri
+predicate is homepage
+object is uri (of homepage)
+
+spo-03: the ppm-co2-message of http://anthropogenicglobalwarming.com/fqs is Most climate scientists warn of need to reduce atmospheric CO2 below 350 ppm "Palnet Health Report: AIR"
+subject is uri
+predicate is ppm-co2-message
+object is Most climate scientists warn of need to reduce atmospheric CO2 below 350 ppm "Planet Health Report: AIR"
+
+-->
