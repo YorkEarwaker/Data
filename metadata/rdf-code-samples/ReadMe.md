@@ -10,6 +10,6 @@ Languages
 * C/C++ - ??? <todo: is there a use case for rdf linked data world Cpp?>
 * others?
 
-* Libs
+Libs
 * RDFLib - as is
 * others - to be
