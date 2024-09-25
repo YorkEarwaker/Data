@@ -1,0 +1,3 @@
+<http://anthropogenicglobalwarming.org/C02> <http://anthropogenicglobalwarming.org/observation> "21 Sep. 2024	422.19 ppm" .
+<http://anthropogenicglobalwarming.org/citizen-scientist> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .
+<http://anthropogenicglobalwarming.org/citizen-scientist> <http://anthropogenicglobalwarming.org/reports> "CO2 observation 21 Sep. 2024	422.19 ppm" .

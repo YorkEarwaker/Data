@@ -1,0 +1,13 @@
+PREFIX agw: <http://anthropogenicglobalwarming.org/person/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+agw:graph-1 {
+	agw:citizen-scientist a foaf:Person .
+	agw:citizen-scientist agw:reports "CO2 observation 21 Sep. 2024	422.19 ppm" .
+
+}
+
+agw:graph-2 {
+	agw:citizen-communications-officer a foaf:Person .
+	agw:citizen-communications-officer agw:reports "A reminder that our world is pushing the planet's thermostat beyond safe levels of 350 ppm CO2, and that more people are needed to combine our ingenuity and resources to keep the present overshoot brief."
+}
