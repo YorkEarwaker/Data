@@ -1,8 +1,11 @@
 
 
-XSLT - XML, XSL, XSD, ...
+XSLT - XML, XSL, ...
 Saxon - Java, transform & query XML processor, push based parser, XSLT & XQuery engines, XSD validation
 Xalan - Java XSL processor, ...
+
+<todo: xml & xsd val, >
+Xerces2 - Java, XML schema validation, XSD 1.1, 
 
 <todo: xml to csv, xml to json?, rss to ?, atom to ?, another? >
 STaX - Java, streaming XML processing. pull based parser. large XML docs, no XSLT | XQuery engines, no XSD validation, 
