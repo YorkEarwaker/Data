@@ -52,4 +52,4 @@ g.add((tim, FOAF.knows, cit_dev))
 the_knower = tim
 
 for row in g.query(q, initBindings={'person': the_knower}):
-    print(f"{the_knower} knows {row}")
+    print(f"{the_knower} knows {row.get('s')}")
