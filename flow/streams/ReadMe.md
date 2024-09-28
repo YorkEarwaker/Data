@@ -2,12 +2,10 @@
 Events through time, 
 
 Event based
-* Flink, Apache
-* NiFi, Apache,
-
-Batch file based - are they? all?
 * Apex, Apache,
+* Flink, Apache, 
 * Kafka, Apache, LinkedIn,
+* NiFi, Apache,
 * Storm, Apache,
 * Spark, Apache
 * Samza, Apache, LinkedIn,
