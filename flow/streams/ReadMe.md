@@ -4,15 +4,17 @@ Events through time,
 Event based
 * Flink, Apache
 * NiFi, Apache,
-* WS02 LLC,
-* ..
 
-Batch file based - are they all?
+Batch file based - are they? all?
 * Apex, Apache,
 * Kafka, Apache, LinkedIn,
 * Storm, Apache,
 * Spark, Apache
 * Samza, Apache, LinkedIn,
+
+EAI?
+*  WS02 LLC,
+* ..
 
 Streaming (processing) as a Service
 * The usual suspects
