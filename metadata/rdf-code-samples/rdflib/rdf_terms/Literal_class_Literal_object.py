@@ -34,9 +34,10 @@ nazva = Literal("Heorhiy", lang="uk") # the Ukrainian version of the name 'Georg
 
 languages_project_wp = URIRef("https://en.wikipedia.org/wiki/Wikipedia:WikiProject_Languages")
 name_description_wp = URIRef("https://en.wikipedia.org/wiki/Name")
-nama = Literal("?", lang="en") # the Old English version of the name '?'
-namo = Literal("?", lang="de") # the Old High German OHG version of the name '?'
-nāman = Literal("?", lang="") # the Sandskrit version of the name '?'
+# <todo: find iso or similar standard for language codes for pie and sanskrit and the like>
+nama = Literal("?", lang="?") # the Old English version of the name '?'
+namo = Literal("?", lang="?") # the Old High German OHG version of the name '?'
+nāman = Literal("?", lang="?") # the Sandskrit version of the name '?'
 # Brave search result
 # there is no specific Unicode character for the ‘₁’ character. The ‘₁’ character appears to be a mathematical subscript, often represented using LaTeX syntax, such as $x_1$
 #  a Unicode character to represent a subscript digit, you can use the Combining Diacritical Marks block (U+0300–U+036F)
@@ -46,8 +47,8 @@ nāman = Literal("?", lang="") # the Sandskrit version of the name '?'
 # For example, U+2081 is the precomposed subscript digit “1”, U+2082 is the precomposed subscript digit “2”, and so on up to U+2089 for the precomposed subscript digit “9”
 # 
 # h₁nómn̥ - <todo: is it possible to use unicode hex values for variable names or part of variable names in python?>
-hnómn̥ = Literal("?", lang="de") # the Proto Indo European PIE version of the name '?'
-nime = Literal("?", lang="de") # the Proto Uraic version of the name '?'
+hnómn̥ = Literal("?", lang="?") # the Proto Indo European PIE version of the name '?'
+nime = Literal("?", lang="?") # the Proto Uraic version of the name '?'
 
 print(f"{hnómn̥} h₁nómn̥ using hex U+2081 as escaped backslash u \\u h\\u2081nómn̥ is printed as h\u2081nómn̥") 
 # prints ? h₁nómn̥ using hex U+2081 as escaped backslash u \u h\u2081nómn̥ is printed as h₁nómn̥
