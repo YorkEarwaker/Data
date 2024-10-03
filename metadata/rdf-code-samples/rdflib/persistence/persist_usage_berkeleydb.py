@@ -43,8 +43,8 @@ graph = Graph('BerkeleyDB', identifier='agwgraph')
 
 # rdflib docs example
 # first time create a store:
-# graph.open('/home/user/data/myRDFLibStore', create=True)
-graph.open('C://dev/sandbox/data/rdflib/agwRDFLibStore', create=True)
+# graph.open('/path/to/your/myRDFLibStore', create=True)
+graph.open('C:/path/to/your/rdflib/agwRDFLibStore', create=True)
 
 # work with the graph:
 agwdata = """
