@@ -53,6 +53,23 @@ nime = Literal("?", lang="?") # the Proto Uraic version of the name '?'
 print(f"{hnómn̥} h₁nómn̥ using hex U+2081 as escaped backslash u \\u h\\u2081nómn̥ is printed as h\u2081nómn̥") 
 # prints ? h₁nómn̥ using hex U+2081 as escaped backslash u \u h\u2081nómn̥ is printed as h₁nómn̥
 
+# <todo: more research on language roots>
+# From Brave search results 'oldest common given name across languages'
+# Sanskrit: Priya (प्रिय), meaning “beloved”
+# Old Norse: Freyja (Freyja), goddess of love and fertility
+# Ancient Greek: Phryne (Φρύνε), a name associated with the goddess Aphrodite
+# English: Freya, a given name still in use today
+# 
+# Also Alexander
+# much more research required
+# 
+# <todo: find oldest common word across all languages>
+# mama and papa (mother and father) are good contenders. survival for infants.
+mama_papa_wp = URIRef("https://en.wikipedia.org/wiki/Mama_and_papa")
+# linguistics ultra conserved words
+ultraconserved_words_questioning_01 = URIRef("https://languagelog.ldc.upenn.edu/nll/?p=4612")
+ultraconserved_words_paper_01 = URIRef("https://pubmed.ncbi.nlm.nih.gov/23650390/")
+
 GEO = Namespace("http://www.opengis.net/ont/geosparql#")
 
 geojson_geometry = Literal(
