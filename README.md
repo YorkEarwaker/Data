@@ -7,4 +7,7 @@ Data things;
 * Storage,
 * Governance, 
 
-
+References
+* Epistemology WP, 
+* Onomastics [WP](https://en.wikipedia.org/wiki/Onomastics)
+* Ontology WP
