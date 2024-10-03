@@ -20,8 +20,8 @@ isim = Literal("Jurji", lang="ar") # the Arabic verson of the name 'George'
 onoma = Literal("Georgios", lang="el") # the Greek version of the name 'George'
 name = Literal("George", lang="en") # the name 'George, as an English string
 nombre = Literal("Jorge", lang="es") # the Spanish version of the name 'George'
-Nām =  Literal("Jarj", lang="hi") # the Hindi version of the name 'George'
-Nâm = Literal("Jūrjis", lang="fa") # the Farsi version of the name 'George'
+nām =  Literal("Jarj", lang="hi") # the Hindi version of the name 'George'
+nâm = Literal("Jūrjis", lang="fa") # the Farsi version of the name 'George'
 nom = Literal("Géorge", lang="fr") # the French version of the name 'George'
 namae = Literal("Jōji", lang="ja") # the Japanese version of the name 'George'
 nomen = Literal("Georgius", lang="la") # the Latin version of the name 'George'
@@ -31,6 +31,26 @@ imya = Literal("Dzhordzh", lang="ru") # the Russian version of the name 'George'
 ad = Literal("Yörji)", lang="tr") # the Turkish version of the name 'George'
 # im'ya also in Ukrainian
 nazva = Literal("Heorhiy", lang="uk") # the Ukrainian version of the name 'George'
+
+languages_project_wp = URIRef("https://en.wikipedia.org/wiki/Wikipedia:WikiProject_Languages")
+name_description_wp = URIRef("https://en.wikipedia.org/wiki/Name")
+nama = Literal("?", lang="en") # the Old English version of the name '?'
+namo = Literal("?", lang="de") # the Old High German OHG version of the name '?'
+nāman = Literal("?", lang="") # the Sandskrit version of the name '?'
+# Brave search result
+# there is no specific Unicode character for the ‘₁’ character. The ‘₁’ character appears to be a mathematical subscript, often represented using LaTeX syntax, such as $x_1$
+#  a Unicode character to represent a subscript digit, you can use the Combining Diacritical Marks block (U+0300–U+036F)
+# U+0331 (COMBINING LOW LEFT SUBSCRIPT DIGIT NINE) can be used to create a subscript digit 1, like this: ₁
+# Unicode block “Superscripts and Subscripts” (U+2070 to U+209F) contains precomposed subscript characters for digits 1-9, 
+# as well as some letters. These characters are intended for semantic usage, not just for mathematical notation.
+# For example, U+2081 is the precomposed subscript digit “1”, U+2082 is the precomposed subscript digit “2”, and so on up to U+2089 for the precomposed subscript digit “9”
+# 
+# h₁nómn̥ - <todo: is it possible to use unicode hex values for variable names or part of variable names in python?>
+hnómn̥ = Literal("?", lang="de") # the Proto Indo European PIE version of the name '?'
+nime = Literal("?", lang="de") # the Proto Uraic version of the name '?'
+
+print(f"{hnómn̥} h₁nómn̥ using hex U+2081 as escaped backslash u \\u h\\u2081nómn̥ is printed as h\u2081nómn̥") 
+# prints ? h₁nómn̥ using hex U+2081 as escaped backslash u \u h\u2081nómn̥ is printed as h₁nómn̥
 
 GEO = Namespace("http://www.opengis.net/ont/geosparql#")
 
