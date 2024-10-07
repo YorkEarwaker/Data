@@ -5,8 +5,8 @@ Coding in different
 
 Languages
 * Python - as is
-* Java - to be
-* Javascript - to be
+* Java - as is
+* JavaScript - to be
 * C/C++ - ??? <todo: is there a use case for rdf linked data world Cpp?>
 * others?
 
