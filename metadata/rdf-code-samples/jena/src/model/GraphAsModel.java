@@ -1,7 +1,7 @@
 // from https://jena.apache.org/tutorials/rdf_api.html
 
 /* The Model Interface 
-** represents a graph as model in Jena
+** represents an rdf graph as model in Jena
 */
 
 package model;
@@ -9,6 +9,9 @@ package model;
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.vocabulary.*;
 
+/*
+** legacy vcard ontology, to model SPO statements
+*/
 public class GraphAsModel extends Object {
 
 	// some defnintions
