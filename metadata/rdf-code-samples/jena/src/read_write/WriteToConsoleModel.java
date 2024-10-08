@@ -64,10 +64,10 @@ public class WriteToConsoleModel extends Object {
 		
 		// create a writer instance 
 		RDFWriter writer = RDFWriter.create()
-								.format(rdfFormat)
-								.source(model)
-								.set(SysRIOT.sysRdfWriterProperties, properties)
-								.build();
+			.format(rdfFormat)
+			.source(model)
+			.set(SysRIOT.sysRdfWriterProperties, properties)
+			.build();
 		
 		// write the model to the console
 		writer.output(System.out);
