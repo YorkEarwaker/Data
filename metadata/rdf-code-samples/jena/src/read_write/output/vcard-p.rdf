@@ -1,0 +1,14 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:j.0="http://www.w3.org/2006/vcard/ns#">
+  <rdf:Description rdf:about="http://agw.org/citizen-scientist">
+    <j.0:organization-name>Anthropogenic Global Warming</j.0:organization-name>
+    <j.0:nickname>Zensci</j.0:nickname>
+    <j.0:n rdf:parseType="Resource">
+      <j.0:honorific-prefix>Mr</j.0:honorific-prefix>
+      <j.0:family-name>Scientist</j.0:family-name>
+      <j.0:given-name>Citizen</j.0:given-name>
+    </j.0:n>
+    <j.0:fn>Citizen Scientist</j.0:fn>
+  </rdf:Description>
+</rdf:RDF>
