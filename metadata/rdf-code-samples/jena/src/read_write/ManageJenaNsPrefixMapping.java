@@ -7,7 +7,6 @@
 package read_write;
 
 import org.apache.jena.rdf.model.*;
-import org.apache.jena.rdfpatch.RDFPatchWrapper;
 import org.apache.jena.vocabulary.*;
 import org.apache.jena.riot.*;
 import org.apache.jena.shared.*;
@@ -138,10 +137,10 @@ public class ManageJenaNsPrefixMapping extends Object {
 		
 				// print out the predicate, subject and object of each statement
 		while (iter.hasNext()) {
-			Statement stmt		= iter.nextStatement();	// get next statement
-			Resource  subject	= stmt.getSubject();	// get the subject
-			Property  predicate = stmt.getPredicate();	// get the predicate
-			RDFNode	  object    = stmt.getObject(); 	// get the object
+			Statement stmt      = iter.nextStatement(); // get next statement
+			Resource  subject   = stmt.getSubject();    // get the subject
+			Property  predicate = stmt.getPredicate();  // get the predicate
+			RDFNode   object    = stmt.getObject();     // get the object
 			
 			System.out.print(subject.toString());
 			System.out.print(" " + predicate.toString() + " ");
@@ -171,10 +170,10 @@ public class ManageJenaNsPrefixMapping extends Object {
 		
 		// create a writer instance 
 		RDFWriter writer = RDFWriter.create()
-								.format(rdfFormat)
-								.source(model)
-								.set(SysRIOT.sysRdfWriterProperties, properties)
-								.build();
+			.format(rdfFormat)
+			.source(model)
+			.set(SysRIOT.sysRdfWriterProperties, properties)
+			.build();
 		
 		// write the model to the console
 		writer.output(System.out);
