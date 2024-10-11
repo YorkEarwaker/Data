@@ -13,12 +13,14 @@ import org.apache.jena.shared.*;
 
 //import java.nio.file.*; // not current used, reminder to do so
 import java.io.*;
+import java.lang.reflect.*;
 import java.util.*;
 
 /*
 ** work in progress, writeToFile2
 ** 
-** https://jena.apache.org/documentation/io/rdf-output.html, retrieved, 08:47 08/10/2024, 
+** https://jena.apache.org/documentation/io/rdf-output.html, 
+** retrieved, 08:47 08/10/2024, 
 */
 public class WriteToFileModel2 extends Object {
 	
@@ -37,31 +39,49 @@ public class WriteToFileModel2 extends Object {
 		manageJenaNsPrefixMapping(model);
 		
 		// output the vcard to file, with vcard version ns prefix
-		writeToFile2(model);
+		writeToFileAllForms(model);
 		
 	}
-
+	
+	/*
+	** set vcard-4.0 as ns in prefixMapping
+	*/
 	private static void manageJenaNsPrefixMapping(Model model) {
 		
 		showStatusNsPrefixMapping(model); // info
 		
 		String prefixName = "vcard-4.0";
-		String prefixURI = "http://www.w3.org/2006/vcard/ns#"; // https://www.w3.org/TR/vcard-rdf/#namespacedeclarations retrieved 14:25, 09/10/2024
-
-		try {
-			model.setNsPrefix(prefixName, prefixURI);
-			System.out.println("ns prefix set " + prefixName + " " + prefixURI); // info
-		} catch(PrefixMapping.IllegalPrefixException e) {
-			System.err.println("IllegalPrefixException " + e);
-		}
+		String prefixUri = "http://www.w3.org/2006/vcard/ns#"; 
+		
+		setJenaNsPrefixMapping(model, prefixName, prefixUri);
 		
 		// remove any existing bindings for the default namespace
 		// to only use custiom prefix remove default j.0 notation
-		// as seen above the default prefix is not included in calculating
+		// the default prefix is not included in calculating prefixMapping
 		// hasNoMappings or prefixCount
-		model.removeNsPrefix("j.0");
+		//model.removeNsPrefix("j.0");
 		
 		showStatusNsPrefixMapping(model); // info
+		
+	}
+	
+	/* 
+	** PrefixMapping, https://javadoc.io/doc/org.apache.jena/jena-core/latest/org.apache.jena.core/org/apache/jena/shared/PrefixMapping.html
+	** retrieved 12:31, 11/10/2024
+	** 
+	** the #, hash/pound, symbole is required. Otherwise Jena uses default j.0 ns
+	** if the # is not provided and the prefix j.0 is removed, see below, Jena creates a j.1 prefix 
+	** https://www.w3.org/TR/vcard-rdf/#namespacedeclarations 
+	** retrieved 14:25, 09/10/2024
+	*/
+	private static void setJenaNsPrefixMapping(Model model, String prefixName, String prefixUri) {
+
+		try {
+			model.setNsPrefix(prefixName, prefixUri);
+			System.out.println("ns prefix set " + prefixName + " " + prefixUri); // info
+		} catch(PrefixMapping.IllegalPrefixException e) {
+			System.err.println("IllegalPrefixException " + e);
+		}
 		
 	}
 	
@@ -94,6 +114,9 @@ public class WriteToFileModel2 extends Object {
 	
 	/*
 	** add some vcard-4.0 data to the rdf graph model
+	** Packgage, https://javadoc.io/doc/org.apache.jena/jena-core/latest/org.apache.jena.core/org/apache/jena/rdf/model/package-summary.html
+	** Class, https://javadoc.io/doc/org.apache.jena/jena-core/latest/org.apache.jena.core/org/apache/jena/rdf/model/Model.html 
+	** retrieved 12:39, 11/10/2024
 	*/
 	private static void populateModelWithVcardData(Model model) {
 		
@@ -108,7 +131,8 @@ public class WriteToFileModel2 extends Object {
 		final String honorificPrefix = "Mr";
 		
 		//final int everyOneIsaNumber = 1357911131;
-		//final String citizenId = "foo:bha:id";
+		//final String citizenId = "agent-id";
+		//final String agwOrgNS = "xmlns:agw-org";
 		
 		// create the resource
 		// use cascading coding sytle to add properties to 
@@ -127,7 +151,8 @@ public class WriteToFileModel2 extends Object {
 		// add the property
 		cit_sci.addProperty(VCARD4.organization_name, orgName);
 		
-		//Property citizenNumber = model.createProperty(citizenId);
+		//
+		//Property citizenNumber = model.createProperty(namespace, citizenId);
 		//Literal cit_sci_id = model.createTypedLiteral(everyOneIsaNumber);
 		
 		// add the property
@@ -135,11 +160,16 @@ public class WriteToFileModel2 extends Object {
 		
 	}
 	
+	/*
+	 ** Object obj, must be either class Lang or class RDFFormat
+	 */
 	private static void printRdfGraphOut(Model model, Object obj) {
 		
 		// <todo: how set properties for the writer?>
 		// <todo: how to configure RDFDataMgr? with xmlbase for example. >
 		
+		//model.
+
 		if (obj instanceof Lang) {
 			//System.out.println("Lang it is " + obj.toString()); // debug
 			RDFDataMgr.write(System.out, model, (Lang) obj); // output RDFXML to console
@@ -147,6 +177,7 @@ public class WriteToFileModel2 extends Object {
 			//System.out.println("Lang it is " + obj.toString()); // debug
 			RDFDataMgr.write(System.out, model, (RDFFormat) obj); // output RDFXML to console
 		} else {
+			//<todo: throw exception, illegal argument>
 			System.err.println("Expected Lang or RDFFormat, obj is " + obj.getClass()); // debug
 		}
 		
@@ -156,45 +187,66 @@ public class WriteToFileModel2 extends Object {
 	** wip work in progress 
 	** <todo: as many output combinations as are practicle>
 	*/
-	private static void writeToFile2(Model model) {
+	private static void writeToFileAllForms(Model model) {
 		
-		String fileName = null; // instantiate, not necessary but polite
-		
-		// <todo: iterate about this, changing filename and output formats>
 		// <todo: cycle through RDFFormat and Lang >
-		Collection constantsCollection = new ArrayList(40);
-		collectClassConstants(constantsCollection);
+		Collection<String> constantsCollection = new ArrayList<String>(40);
+		writeCollectionToFile(model, constantsCollection, RDFFormat.class);
+
+		constantsCollection.clear();
+
+		//collectClassConstants(constantsCollection, Lang.class);
+		writeCollectionToFile(model, constantsCollection, Lang.class);
 		
-		// set the output directory and file
-		// java.io 
-		fileName = "vcard-lang-turtle.ttl"; // name the output file p for preferred
-		createFile(fileName); // create the output stream
+	}
+
+	private static void writeCollectionToFile(Model model, Collection<String> constantsCollection, Class<?> clazz) {
 		
-		// now write
-		// the preferred way to write RDF data
-		// provides many more formatting options
-		// Apache Jen RIOT, 
-		// RDFDataMgr.write(OutputStream, Model, Lang) or 
-		// RDFDataMgr.write(OutputStream, Dataset, Lang)
-		// RDFDataMgr.write(OutputStream, Model, RDFFormat) or 
-		// RDFDataMgr.write(OutputStream, Dataset, RDFFormat)
-		// RIOT RDFFormat; TURTLE, NTRIPLES, JSONLD, RDFXML, RDFXML_PLAIN, N3, RDFJSON
-		// example RDFDataMgr.write(System.out, model, Lang.RDFXML); // select RDFXML for comparison
+		collectClassConstants(constantsCollection, RDFFormat.class);
+
+		// <todo: iterate about this, changing filename and output formats>
+		System.out.println(constantsCollection.isEmpty());
 		
-		// print the vcard to the file
-		printRdfGraphOut(model, Lang.TURTLE); // the preferred way to write output
-		
-		resetOutputStream();
-		
-		// print the vcard to the console
-		printRdfGraphOut(model, Lang.TURTLE); // the preferred way to write output
-		
-		
+		//Iterator iter = constantsCollection.iterator();
+		for (String outPutForm : constantsCollection) {
+			
+			System.out.println(outPutForm);
+
+			String fileName = "vcard-4.0-"; // <todo: get the prefixName form model>
+			//String outPutForm = "foo"; // constantsCollection.iterator().next().toLowerCase();
+			String fileExtension = ".jsonld"; // <todo: get from map?>
+			// set the output directory and file
+			// java.io 
+			//fileName = "vcard-lang-turtle.ttl"; // name the output file p for preferred
+			createFileName(fileName, clazz, outPutForm, fileExtension);
+			createFile(fileName); // create the output stream
+	
+			// now write
+			// the preferred way to write RDF data
+			// provides many more formatting options
+			// Apache Jen RIOT, 
+			// RDFDataMgr.write(OutputStream, Model, Lang) or 
+			// RDFDataMgr.write(OutputStream, Dataset, Lang)
+			// RDFDataMgr.write(OutputStream, Model, RDFFormat) or 
+			// RDFDataMgr.write(OutputStream, Dataset, RDFFormat)
+			// RIOT RDFFormat; TURTLE, NTRIPLES, JSONLD, RDFXML, RDFXML_PLAIN, N3, RDFJSON
+			// example RDFDataMgr.write(System.out, model, Lang.RDFXML); // select RDFXML for comparison
+	
+			// print the vcard to the file
+			//printRdfGraphOut(model, outPutForm); // the preferred way to write output
+	
+			resetOutputStream();
+	
+			// print the vcard to the console
+			//printRdfGraphOut(model, outPutForm); // the preferred way to write output
+		}
 	}
 	
 	/*
 	**
-	** https://jena.apache.org/documentation/io/ retrieved 10:45, 09/10/2024
+	** https://jena.apache.org/documentation/io/ 
+	** retrieved 10:45, 09/10/2024
+	**
 	** Lang language and syntax, which has a related RDFFormat serialisation format
 	** choosing a specific Lang, Jena internally maps that to a relevant format
 	** A lang is usually tied to a specific format
@@ -204,32 +256,32 @@ public class WriteToFileModel2 extends Object {
 	** command line tool
 	** <todo: is the internal map of file extensions public? how to access for coding? >
 	** file extention    language name
-	** .ttl              Turtle
-	** .nt               N-Triples
-	** .nq               N-Quads
-	** .trig             TriG
-	** .rdf              RDF/XML
-	** .owl              RDF/XML
-	** .jsonld           JSON-LD
-	** .trdf             RDF Thrift
-	** .rt               RDF Thrift
-	** .rpb              RDF Protobuf
-	** .pbrdf            RDF Protobuf
-	** .rj               RDF/JSON
-	** .trix             TriX
+	** .ttl                     Turtle
+	** .nt                      N-Triples
+	** .nq                      N-Quads
+	** .trig                    TriG
+	** .rdf                     RDF/XML
+	** .owl                     RDF/XML
+	** .jsonld                  JSON-LD
+	** .trdf                    RDF Thrift
+	** .rt                      RDF Thrift
+	** .rpb                     RDF Protobuf
+	** .pbrdf                   RDF Protobuf
+	** .rj                      RDF/JSON
+	** .trix                    TriX
 	** 	** 	**  
-	** Jena writer name	RIOT RDFFormat
-	** "TURTLE"          TURTLE
-	** "TTL"             TURTLE
-	** "Turtle"          TURTLE
-	** "N-TRIPLES"       NTRIPLES
-	** "N-TRIPLE"        NTRIPLES
-	** "NT"              NTRIPLES
-	** "JSON-LD"         JSONLD
-	** "RDF/XML-ABBREV"  RDFXML
-	** "RDF/XML"         RDFXML_PLAIN
-	** "N3"              N3
-	** "RDF/JSON"        RDFJSON
+	** Jena writer name         RIOT RDFFormat
+	** "TURTLE"                 TURTLE
+	** "TTL"                    TURTLE
+	** "Turtle"                 TURTLE
+	** "N-TRIPLES"              NTRIPLES
+	** "N-TRIPLE"               NTRIPLES
+	** "NT"                     NTRIPLES
+	** "JSON-LD"                JSONLD
+	** "RDF/XML-ABBREV"         RDFXML
+	** "RDF/XML"                RDFXML_PLAIN
+	** "N3"                     N3
+	** "RDF/JSON"               RDFJSON
 	** 	** 	** 
 	** streaming only??? possibly not relevant for write?
 	** assume this the default format of the language
@@ -247,24 +299,24 @@ public class WriteToFileModel2 extends Object {
 	** RDFFormat.RDF_PROTO      Lang.RDFPROTO
 	** 	** 	** 
 	** Normal Printing
-	** RDFFormat or Lang	Default
-	** TURTLE               Turtle, pretty printed
-	** TTL                  Turtle, pretty printed
-	** NTRIPLES             N-Triples, UTF-8
-	** TRIG                 TriG, pretty printed
-	** NQUADS               N-Quads, UTF-8
-	** JSONLD               JSON-LD, pretty printed
-	** RDFXML               RDF/XML, pretty printed
+	** RDFFormat or Lang        Default
+	** TURTLE                   Turtle, pretty printed
+	** TTL                      Turtle, pretty printed
+	** NTRIPLES                 N-Triples, UTF-8
+	** TRIG                     TriG, pretty printed
+	** NQUADS                   N-Quads, UTF-8
+	** JSONLD                   JSON-LD, pretty printed
+	** RDFXML                   RDF/XML, pretty printed
 	** RDFJSON
 	** TRIX
-	** RDFTHRFT             RDF Binary Thrift
-	** RDFPROTO             RDF Binary Protobuf
+	** RDFTHRFT                 RDF Binary Thrift
+	** RDFPROTO                 RDF Binary Protobuf
 	** 	** 	** 
 	** Pretty printed
-	** RDFFormat       Same as
-	** TURTLE_PRETTY   TURTLE, TTL
-	** TRIG_PRETTY     TRIG
-	** RDFXML_PRETTY   RDFXML_ABBREV, RDFXML
+	** RDFFormat                Same as
+	** TURTLE_PRETTY            TURTLE, TTL
+	** TRIG_PRETTY              TRIG
+	** RDFXML_PRETTY            RDFXML_ABBREV, RDFXML
 	** 	** 	** 
 	** Streamed Blocks
 	** RDFFormat
@@ -282,7 +334,7 @@ public class WriteToFileModel2 extends Object {
 	** RIOT.symTurtleIndentStyle        “ttl:indentStyle”      “wide”, “long”
 	** RIOT.symTurtleOmitBase           “ttl:omitBase”         “true”, “false”
 	** 	** 	** 
-	** Directive Style                 Effect
+	** Directive Style                  Effect
 	** “sparql”, “rdf11”	            Use PREFIX and BASE in output.
 	** “at”, “rdf10”                    Use @prefix and @base in output.
 	** unset                            Use PREFIX and BASE in output.
@@ -327,121 +379,232 @@ public class WriteToFileModel2 extends Object {
 	** RDFXML_PLAIN                                  “RDF/XML”
 	**	** 	** 
 	** https://javadoc.io/doc/org.apache.jena/jena-arq/latest/org.apache.jena.arq/org/apache/jena/riot/RDFLanguages.html
-	** Modifier and Type	Field	Description 
-	** static final Lang	JSONLD	The standard JSON-LD registration.
-	** static final Lang	JSONLD11	
-	** static final Lang	N3	N3 (treat as Turtle)
-	** static final Lang	NQ	Alternative constant NQUADS
-	** static final Lang	NQUADS	N-Quads
-	** static final Lang	NT	Alternative constant for NTRIPLES
-	** static final Lang	NTRIPLES	N-Triples
-	** static final Lang	RDFJSON	RDF/JSON.
-	** static final Lang	RDFNULL	The "null" language
-	** static final Lang	RDFPROTO	
-	** static final Lang	RDFRAW	Output-only language for a StreamRDF (for development)
-	** static final Lang	RDFTHRIFT	The RDF syntax RDF Thrift
-	** static final Lang	RDFXML	RDF/XML
-	** static final Lang	SHACLC	SHACL Compact Syntax (2020-07-01)
-	** static final String	strLangCSV	
-	** static final String	strLangJSONLD	
-	** static final String	strLangJSONLD11	
-	** static final String	strLangN3	
-	** static final String	strLangNQuads	
-	** static final String	strLangNTriples	
-	** static final String	strLangRDFJSON	
-	** static final String	strLangRDFPROTO	
-	** static final String	strLangRDFTHRIFT	
-	** static final String	strLangRDFXML	
-	** static final String	strLangTriG	
-	** static final String	strLangTriX	
-	** static final String	strLangTSV	
-	** static final String	strLangTurtle	
-	** static final Lang	TEXT	Text
-	** static final Lang	TRIG	TriG
-	** static final Lang	TRIX	TriX
-	** static final Lang	TTL	Alternative constant for TURTLE
-	** static final Lang	TURTLE	Turtle
+	** retrieved 10:45, 09/10/2024
+	**
+	** Modifier and Type                Field                Description
+	** static final Lang                JSONLD               The standard JSON-LD registration.
+	** static final Lang                JSONLD11
+	** static final Lang                N3                   N3 (treat as Turtle)
+	** static final Lang                NQ                   Alternative constant NQUADS
+	** static final Lang                NQUADS               N-Quads
+	** static final Lang                NT                   Alternative constant for NTRIPLES
+	** static final Lang                NTRIPLES             N-Triples
+	** static final Lang                RDFJSON              RDF/JSON.
+	** static final Lang                RDFNULL              The "null" language
+	** static final Lang                RDFPROTO
+	** static final Lang                RDFRAW               Output-only language for a StreamRDF (for development)
+	** static final Lang                RDFTHRIFT            The RDF syntax RDF Thrift
+	** static final Lang                RDFXML               RDF/XML
+	** static final Lang                SHACLC               SHACL Compact Syntax (2020-07-01)
+	** static final String              strLangCSV
+	** static final String              strLangJSONLD
+	** static final String              strLangJSONLD11
+	** static final String              strLangN3
+	** static final String              strLangNQuads
+	** static final String              strLangNTriples
+	** static final String              strLangRDFJSON
+	** static final String              strLangRDFPROTO
+	** static final String              strLangRDFTHRIFT
+	** static final String              strLangRDFXML
+	** static final String              strLangTriG
+	** static final String              strLangTriX
+	** static final String              strLangTSV
+	** static final String              strLangTurtle
+	** static final Lang                TEXT                 Text
+	** static final Lang                TRIG                 TriG
+	** static final Lang                TRIX                 TriX
+	** static final Lang                TTL                  Alternative constant for TURTLE
+	** static final Lang                TURTLE               Turtle
 	**	** 	** 
 	** https://javadoc.io/doc/org.apache.jena/jena-arq/latest/org.apache.jena.arq/org/apache/jena/riot/RDFFormat.html
-	** Modifier and Type	Field	Description 
-	** static final RDFFormatVariant	ABBREV	RDF/XML ABBREV variant
-	** static final RDFFormatVariant	ASCII	Use ASCII output (N-triples, N-Quads)
-	** static final RDFFormatVariant	BLOCKS	Print in blocks, typically all triples with the same subject in an incoming triple/quad stream
-	** static final RDFFormatVariant	FLAT	Print out one per line
-	** static final RDFFormat	JSONLD	
-	** static final RDFFormat	JSONLD_FLAT	
-	** static final RDFFormat	JSONLD_PLAIN	
-	** static final RDFFormat	JSONLD_PRETTY	
-	** static RDFFormat	JSONLD11	JSON LD 1.1 default form - multi-line JSON
-	** static RDFFormat	JSONLD11_FLAT	JSON LD 1.1 - single-line JSON
-	** static RDFFormat	JSONLD11_PLAIN	JSON LD 1.1 - multi-line JSON
-	** static RDFFormat	JSONLD11_PRETTY	JSON LD 1.1 - multi-line JSON - prefixes and native types.
-	** static final RDFFormatVariant	LONG	Print with fixed indentation width and linebreaks after each sequence element
-	** static final RDFFormat	NQ	N-Quads - RDF 1.1 form - UTF-8
-	** static final RDFFormat	NQUADS	N-Quads - RDF 1.1 form - UTF-8
-	** static final RDFFormat	NQUADS_ASCII	N-Quads - Use ASCII
-	** static final RDFFormat	NQUADS_UTF8	N-Quads in UTF-8
-	** static final RDFFormat	NT	N-Triples - RDF 1.1 form - UTF-8
-	** static final RDFFormat	NTRIPLES	N-Triples - RDF 1.1 form - UTF-8
-	** static final RDFFormat	NTRIPLES_ASCII	N-Triples - Use ASCII
-	** static final RDFFormat	NTRIPLES_UTF8	N-Triples in UTF-8
-	** static final RDFFormatVariant	PLAIN	Plain printing variant
-	** static final RDFFormatVariant	PRETTY	Pretty printing variant
-	** static final RDFFormat	RDF_PROTO	RDF Protobuf output.
-	** static final RDFFormat	RDF_PROTO_VALUES	A variant of an an RDFFormat that uses value encoding (e.g.
-	** static final RDFFormat	RDF_THRIFT	RDF Thrift output.
-	** static final RDFFormat	RDF_THRIFT_VALUES	A variant of an an RDFFormat that uses value encoding (e.g.
-	** static final RDFFormat	RDFJSON	
-	** static final RDFFormat	RDFNULL	The "null" output format (a sink that prints nothing, usually quite efficiently)
-	** static final RDFFormat	RDFRAW	Stream-only output format for development - flushes every line.
-	** static final RDFFormat	RDFXML	
-	** static final RDFFormat	RDFXML_ABBREV	
-	** static final RDFFormat	RDFXML_PLAIN	
-	** static final RDFFormat	RDFXML_PRETTY	
-	** static final RDFFormat	SHACLC	SHACL Compact Syntax
-	** static final RDFFormat	TRIG	TriG - default form
-	** static final RDFFormat	TRIG_BLOCKS	TriG - write in blocks of triples, with same subject, no nested object or RDF lists
-	** static final RDFFormat	TRIG_FLAT	TriG - one line per triple
-	** static final RDFFormat	TRIG_LONG	TriG - with fixed indentation width and linebreaks after each sequence element
-	** static final RDFFormat	TRIG_PRETTY	TriG - pretty form
-	** static final RDFFormat	TRIX	
-	** static final RDFFormat	TTL	Turtle - short name
-	** static final RDFFormat	TURTLE	Turtle - default form
-	** static final RDFFormat	TURTLE_BLOCKS	Turtle - write in blocks of triples, with same subject, no nested object or RDF lists
-	** static final RDFFormat	TURTLE_FLAT	Turtle - one line per triple
-	** static final RDFFormat	TURTLE_LONG	Turtle - with fixed indentation width and linebreaks after each sequence element
-	** static final RDFFormat	TURTLE_PRETTY	Turtle - pretty form
-	** static final RDFFormatVariant	UTF8	Use UTF-8 output (N-triples, N-Quads)
-	** static final RDFFormatVariant	ValueEncoding	Variant for RDF Thrift using values
+	** retrieved 10:45, 09/10/2024
+	**
+	** Modifier and Type                Field                Description
+	** static final RDFFormatVariant    ABBREV               RDF/XML ABBREV variant
+	** static final RDFFormatVariant    ASCII                Use ASCII output (N-triples, N-Quads)
+	** static final RDFFormatVariant    BLOCKS               Print in blocks, typically all triples with the same subject in an incoming triple/quad stream
+	** static final RDFFormatVariant    FLAT                 Print out one per line
+	** static final RDFFormat           JSONLD	
+	** static final RDFFormat           JSONLD_FLAT	
+	** static final RDFFormat           JSONLD_PLAIN
+	** static final RDFFormat           JSONLD_PRETTY
+	** static RDFFormat                 JSONLD11             JSON LD 1.1 default form - multi-line JSON
+	** static RDFFormat                 JSONLD11_FLAT        JSON LD 1.1 - single-line JSON
+	** static RDFFormat                 JSONLD11_PLAIN       JSON LD 1.1 - multi-line JSON
+	** static RDFFormat                 JSONLD11_PRETTY      JSON LD 1.1 - multi-line JSON - prefixes and native types.
+	** static final RDFFormatVariant    LONG                 Print with fixed indentation width and linebreaks after each sequence element
+	** static final RDFFormat           NQ                   N-Quads - RDF 1.1 form - UTF-8
+	** static final RDFFormat           NQUADS               N-Quads - RDF 1.1 form - UTF-8
+	** static final RDFFormat           NQUADS_ASCII         N-Quads - Use ASCII
+	** static final RDFFormat           NQUADS_UTF8          N-Quads in UTF-8
+	** static final RDFFormat           NT                   N-Triples - RDF 1.1 form - UTF-8
+	** static final RDFFormat           NTRIPLES             N-Triples - RDF 1.1 form - UTF-8
+	** static final RDFFormat           NTRIPLES_ASCII       N-Triples - Use ASCII
+	** static final RDFFormat           NTRIPLES_UTF8        N-Triples in UTF-8
+	** static final RDFFormatVariant	PLAIN                Plain printing variant
+	** static final RDFFormatVariant	PRETTY               Pretty printing variant
+	** static final RDFFormat           RDF_PROTO            RDF Protobuf output.
+	** static final RDFFormat           RDF_PROTO_VALUES     A variant of an an RDFFormat that uses value encoding (e.g.
+	** static final RDFFormat           RDF_THRIFT           RDF Thrift output.
+	** static final RDFFormat           RDF_THRIFT_VALUES    A variant of an an RDFFormat that uses value encoding (e.g.
+	** static final RDFFormat           RDFJSON	
+	** static final RDFFormat           RDFNULL              The "null" output format (a sink that prints nothing, usually quite efficiently)
+	** static final RDFFormat           RDFRAW               Stream-only output format for development - flushes every line.
+	** static final RDFFormat           RDFXML
+	** static final RDFFormat           RDFXML_ABBREV
+	** static final RDFFormat           RDFXML_PLAIN
+	** static final RDFFormat           RDFXML_PRETTY
+	** static final RDFFormat           SHACLC               SHACL Compact Syntax
+	** static final RDFFormat           TRIG                 TriG - default form
+	** static final RDFFormat           TRIG_BLOCKS          TriG - write in blocks of triples, with same subject, no nested object or RDF lists
+	** static final RDFFormat           TRIG_FLAT            TriG - one line per triple
+	** static final RDFFormat           TRIG_LONG            TriG - with fixed indentation width and linebreaks after each sequence element
+	** static final RDFFormat           TRIG_PRETTY          TriG - pretty form
+	** static final RDFFormat           TRIX	
+	** static final RDFFormat           TTL                  Turtle - short name
+	** static final RDFFormat           TURTLE               Turtle - default form
+	** static final RDFFormat           TURTLE_BLOCKS        Turtle - write in blocks of triples, with same subject, no nested object or RDF lists
+	** static final RDFFormat           TURTLE_FLAT          Turtle - one line per triple
+	** static final RDFFormat           TURTLE_LONG          Turtle - with fixed indentation width and linebreaks after each sequence element
+	** static final RDFFormat           TURTLE_PRETTY        Turtle - pretty form
+	** static final RDFFormatVariant    UTF8                 Use UTF-8 output (N-triples, N-Quads)
+	** static final RDFFormatVariant    ValueEncoding        Variant for RDF Thrift using values
 	**	** 	** 
 	** https://javadoc.io/doc/org.apache.jena/jena-arq/latest/org.apache.jena.arq/org/apache/jena/riot/Lang.html
-	** Modifier and Type	Field	Description 
-	** static Lang	CSV	"CSV" - Used in various ways.
-	** static Lang	JSONLD	JSON-LD.
-	** static Lang	JSONLD11	JSONLD 1.1
-	** static Lang	N3	N3 (treat as Turtle)
-	** static Lang	NQ	Alternative constant NQUADS
-	** static Lang	NQUADS	N-Quads
-	** static Lang	NT	Alternative constant for NTRIPLES
-	** static Lang	NTRIPLES	N-Triples
-	** static Lang	RDFJSON	RDF/JSON.
-	** static Lang	RDFNULL	The "null" language
-	** static Lang	RDFPROTO	The RDF syntax RDF Thrift
-	** static Lang	RDFRAW	Output-only language for a StreamRDF (for development)
-	** static Lang	RDFTHRIFT	The RDF syntax RDF Thrift
-	** static Lang	RDFXML	RDF/XML
-	** static Lang	SHACLC	SHACL Compact Syntax (2020-07-01)
-	** static Lang	TRIG	TriG
-	** static Lang	TRIX	TriX
-	** static Lang	TSV	"TSV" - Used in various ways.
-	** static Lang	TTL	Alternative constant for TURTLE
-	** static Lang	TURTLE	Turtle
+	** retrieved 10:45, 09/10/2024
+	**
+	** Modifier and Type                Field                Description
+	** static Lang                      CSV                  "CSV" - Used in various ways.
+	** static Lang                      JSONLD               JSON-LD.
+	** static Lang                      JSONLD11             JSONLD 1.1
+	** static Lang                      N3                   N3 (treat as Turtle)
+	** static Lang                      NQ                   Alternative constant NQUADS
+	** static Lang                      NQUADS               N-Quads
+	** static Lang                      NT                   Alternative constant for NTRIPLES
+	** static Lang                      NTRIPLES             N-Triples
+	** static Lang                      RDFJSON              RDF/JSON.
+	** static Lang                      RDFNULL              The "null" language
+	** static Lang                      RDFPROTO             The RDF syntax RDF Thrift
+	** static Lang                      RDFRAW               Output-only language for a StreamRDF (for development)
+	** static Lang                      RDFTHRIFT            The RDF syntax RDF Thrift
+	** static Lang                      RDFXML               RDF/XML
+	** static Lang                      SHACLC               SHACL Compact Syntax (2020-07-01)
+	** static Lang                      TRIG                 TriG
+	** static Lang                      TRIX                 TriX
+	** static Lang                      TSV                  "TSV" - Used in various ways.
+	** static Lang                      TTL                  Alternative constant for TURTLE
+	** static Lang                      TURTLE               Turtle
 	*/
-	private static void collectClassConstants(Collection constantsCollection) {
+	private static void collectClassConstants(Collection<String> constantsCollection, Class<?> clazz) {
 		
 		//<todo: implement reflection>
 		//<todo: implement enum in a separate method, could this be dynamic?>
+
+		String className = clazz.getName();
+
+		if (className == Lang.class.getName()) {
+			System.console().printf("** collectClassConstants, " + className + " \n"); // debug
+			getStaticConstants(constantsCollection, clazz);
+		} else if (className == RDFFormat.class.getName()) {
+			System.console().printf("** collectClassConstants, " + className + " \n"); // debug
+			getStaticFinalConstants(constantsCollection, clazz);
+		} else {
+			//<todo: throw exception, illegal argument>
+			System.err.println("Expected Lang or RDFFormat, obj is " + className + " \n"); // error
+		}
+
+	}
+	
+	private static void getStaticConstants(Collection<String> constantsCollection, Class<?> clazz) {
+
+		//<todo: add try catch>
+		Field[] declaredFields = clazz.getDeclaredFields();
+		System.console().printf("** getStaticConstants, declaredFields size is " + declaredFields.length + " \n"); // debug
+		List<Field> staticFields = new ArrayList<Field>();
+		for (Field field : declaredFields) {
 			
+			if (java.lang.reflect.Modifier.isStatic(field.getModifiers())) {
+				staticFields.add(field);
+			}
+		}
+
+		System.console().printf("** getStaticConstants, staticFields size is " + staticFields.size() + " \n"); // debug
+
+		// <todo: resize constantsCollection?>
+		// int arrayInitialCapacity = staticFields.size(); 
+		// try {
+			// constantsCollection = new ArrayList<String>(arrayInitialCapacity);
+		// } catch (IllegalArgumentException e) {
+			// System.err.println("IllegalArgumentException thrown " + e);
+		// }
+
+		for (Field field : staticFields) {
+			constantsCollection.add(field.getName());
+		}
+		System.console().printf("** getStaticConstants, constantsCollection size is " + constantsCollection.size() + " \n"); // debug
+	}
+
+	private static void getStaticFinalConstants(Collection<String> constantsCollection, Class<?> clazz) {
+
+		//<todo: add try catch>
+		Field[] declaredFields = clazz.getDeclaredFields();
+		System.console().printf("** getStaticFinalConstants, declaredFields size is " + declaredFields.length + " \n"); // debug
+		List<Field> staticFinalFields = new ArrayList<Field>();
+		for (Field field : declaredFields) {
+			
+			if (java.lang.reflect.Modifier.isStatic(field.getModifiers()) &
+				java.lang.reflect.Modifier.isFinal(field.getModifiers()) &
+				(clazz == field.getType())) {
+					
+				staticFinalFields.add(field);
+			}
+		}
+
+		System.console().printf("** getStaticFinalConstants, staticFinalFields size is " + staticFinalFields.size() + " \n"); // debug
+
+		// int arrayInitialCapacity = staticFinalFields.size(); 
+		// try {
+			// Collection<String> foo = new ArrayList<String>(arrayInitialCapacity);
+			// constantsCollection = foo;
+		// } catch (IllegalArgumentException e) {
+			// System.err.println("IllegalArgumentException thrown " + e);
+		// }
+
+		for (Field field : staticFinalFields) {
+			constantsCollection.add(field.getName());
+		}
+		System.console().printf("** getStaticConstants, constantsCollection size is " + constantsCollection.size() + " \n"); // debug
+	}
+	
+	/*
+	 ** wip
+	 */
+	private static void createFileExtensionMap() {
+	
+	/*	
+	** file extention    language name
+	** .ttl                     Turtle
+	** .nt                      N-Triples
+	** .nq                      N-Quads
+	** .trig                    TriG
+	** .rdf                     RDF/XML
+	** .owl                     RDF/XML
+	** .jsonld                  JSON-LD
+	** .trdf                    RDF Thrift
+	** .rt                      RDF Thrift
+	** .rpb                     RDF Protobuf
+	** .pbrdf                   RDF Protobuf
+	** .rj                      RDF/JSON
+	** .trix                    TriX
+	*/
+	
+	}
+
+	private static void createFileName(String fileName, Class<?> clazz, String outPutForm, String fileExtension) {
+		
+		fileName = fileName + clazz.getSimpleName() + "-" + outPutForm.toLowerCase() + fileExtension;
+		System.out.println("createFileName is " + fileName); // info
+		
 	}
 	
 	/*
