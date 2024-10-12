@@ -16,6 +16,8 @@ import java.io.*;
 import java.lang.reflect.*;
 import java.util.*;
 
+import read_write.JenaLangFileExtension;
+
 /*
 ** work in progress, writeToFile2
 ** 
@@ -26,7 +28,7 @@ public class WriteToFileModel2 extends Object {
 	
 	
 	public static void main (String args[]) {
-		
+
 		// create an empty Model
 		Model model = ModelFactory.createDefaultModel();
 		
@@ -171,14 +173,15 @@ public class WriteToFileModel2 extends Object {
 		//model.
 
 		if (obj instanceof Lang) {
-			//System.out.println("Lang it is " + obj.toString()); // debug
+			System.console().printf("Lang it is " + obj.toString()); // debug
 			RDFDataMgr.write(System.out, model, (Lang) obj); // output RDFXML to console
 		} else if (obj instanceof RDFFormat) {
-			//System.out.println("Lang it is " + obj.toString()); // debug
+			System.console().printf("Lang it is " + obj.toString()); // debug
 			RDFDataMgr.write(System.out, model, (RDFFormat) obj); // output RDFXML to console
 		} else {
 			//<todo: throw exception, illegal argument>
 			System.err.println("Expected Lang or RDFFormat, obj is " + obj.getClass()); // debug
+			throw new IllegalArgumentException();
 		}
 		
 	}
@@ -191,9 +194,10 @@ public class WriteToFileModel2 extends Object {
 		
 		// <todo: cycle through RDFFormat and Lang >
 		Collection<String> constantsCollection = new ArrayList<String>(40);
-		writeCollectionToFile(model, constantsCollection, RDFFormat.class);
+		//writeCollectionToFile(model, constantsCollection, RDFFormat.class);
 
 		constantsCollection.clear();
+		System.console().printf("after clearing constantsCollection size is " + constantsCollection.size() + "\n");
 
 		//collectClassConstants(constantsCollection, Lang.class);
 		writeCollectionToFile(model, constantsCollection, Lang.class);
@@ -202,23 +206,31 @@ public class WriteToFileModel2 extends Object {
 
 	private static void writeCollectionToFile(Model model, Collection<String> constantsCollection, Class<?> clazz) {
 		
-		collectClassConstants(constantsCollection, RDFFormat.class);
+		collectClassConstants(constantsCollection, clazz);
 
 		// <todo: iterate about this, changing filename and output formats>
 		System.out.println(constantsCollection.isEmpty());
 		
+		String fileExtension = new String(""); // <todo: get from map?>
+		String fileName = new String("vcard-4.0-");
+		WriteToFileModel2 writeToFileModel2 = new WriteToFileModel2();
+		
 		//Iterator iter = constantsCollection.iterator();
 		for (String outPutForm : constantsCollection) {
 			
-			System.out.println(outPutForm);
+			System.console().printf("outPutForm is " + outPutForm + "\n");
 
-			String fileName = "vcard-4.0-"; // <todo: get the prefixName form model>
-			//String outPutForm = "foo"; // constantsCollection.iterator().next().toLowerCase();
-			String fileExtension = ".jsonld"; // <todo: get from map?>
+			 // <todo: get the prefixName form model>
+			//String outPutForm = "RDFXML"; // constantsCollection.iterator().next().toLowerCase();
+			
+			fileExtension = writeToFileModel2.getFileExtension(outPutForm);
+			//getFileExtension(fileExtension, outPutForm);
+			//System.console().printf("*** fileExtension is " + fileExtension + "\n");
 			// set the output directory and file
 			// java.io 
 			//fileName = "vcard-lang-turtle.ttl"; // name the output file p for preferred
 			createFileName(fileName, clazz, outPutForm, fileExtension);
+			//createFileName(fileName, clazz, outPutForm); // <todo: use four param version. issue with filename state.>
 			createFile(fileName); // create the output stream
 	
 			// now write
@@ -509,8 +521,9 @@ public class WriteToFileModel2 extends Object {
 			System.console().printf("** collectClassConstants, " + className + " \n"); // debug
 			getStaticFinalConstants(constantsCollection, clazz);
 		} else {
-			//<todo: throw exception, illegal argument>
+			//<todo: throw exception, illegal argument
 			System.err.println("Expected Lang or RDFFormat, obj is " + className + " \n"); // error
+			throw new IllegalArgumentException();
 		}
 
 	}
@@ -540,6 +553,7 @@ public class WriteToFileModel2 extends Object {
 
 		for (Field field : staticFields) {
 			constantsCollection.add(field.getName());
+			System.console().printf("** getStaticConstants, field name is " + field.getName() + " \n"); // debug
 		}
 		System.console().printf("** getStaticConstants, constantsCollection size is " + constantsCollection.size() + " \n"); // debug
 	}
@@ -572,16 +586,14 @@ public class WriteToFileModel2 extends Object {
 
 		for (Field field : staticFinalFields) {
 			constantsCollection.add(field.getName());
+			System.console().printf("** getStaticFinalConstants, field name is " + field.getName() + " \n"); // debug
 		}
-		System.console().printf("** getStaticConstants, constantsCollection size is " + constantsCollection.size() + " \n"); // debug
+		System.console().printf("** getStaticFinalConstants, constantsCollection size is " + constantsCollection.size() + " \n"); // debug
 	}
 	
 	/*
-	 ** wip
-	 */
-	private static void createFileExtensionMap() {
-	
-	/*	
+	** wip
+	** <todo: consider Enum instead of Map>
 	** file extention    language name
 	** .ttl                     Turtle
 	** .nt                      N-Triples
@@ -596,17 +608,81 @@ public class WriteToFileModel2 extends Object {
 	** .pbrdf                   RDF Protobuf
 	** .rj                      RDF/JSON
 	** .trix                    TriX
+	** **
+	** https://javadoc.io/doc/org.apache.jena/jena-arq/latest/org.apache.jena.arq/org/apache/jena/riot/Lang.html
+	** retrieved 10:45, 09/10/2024
+	**
+	** Modifier and Type                Field                Description
+	** static Lang                      CSV                  "CSV" - Used in various ways.
+	** static Lang                      JSONLD               JSON-LD.
+	** static Lang                      JSONLD11             JSONLD 1.1
+	** static Lang                      N3                   N3 (treat as Turtle)
+	** static Lang                      NQ                   Alternative constant NQUADS
+	** static Lang                      NQUADS               N-Quads
+	** static Lang                      NT                   Alternative constant for NTRIPLES
+	** static Lang                      NTRIPLES             N-Triples
+	** static Lang                      RDFJSON              RDF/JSON.
+	** static Lang                      RDFNULL              The "null" language
+	** static Lang                      RDFPROTO             The RDF syntax RDF Thrift
+	** static Lang                      RDFRAW               Output-only language for a StreamRDF (for development)
+	** static Lang                      RDFTHRIFT            The RDF syntax RDF Thrift
+	** static Lang                      RDFXML               RDF/XML
+	** static Lang                      SHACLC               SHACL Compact Syntax (2020-07-01)
+	** static Lang                      TRIG                 TriG
+	** static Lang                      TRIX                 TriX
+	** static Lang                      TSV                  "TSV" - Used in various ways.
+	** static Lang                      TTL                  Alternative constant for TURTLE
+	** static Lang                      TURTLE               Turtle
 	*/
+	private static void getFileExtension(String fileExtension, String outPutForm) {
+	
+		// RDFLanguages.fileExtToLang(...)
+		// RDFLanguages.filenameToLang(...)
+	
+		JenaLangFileExtension jenaLangFileExtension = JenaLangFileExtension.valueOf(outPutForm);
+		fileExtension = jenaLangFileExtension.getValue();
+		System.console().printf("fileExtension is " + fileExtension + "\n"); // info
 	
 	}
 
+	private String getFileExtension(String outPutForm) {
+	
+		// RDFLanguages.fileExtToLang(...)
+		// RDFLanguages.filenameToLang(...)
+		String fileExtension = new String();
+		//getFileExtension(fileExtension, outPutForm);
+		JenaLangFileExtension jenaLangFileExtension = JenaLangFileExtension.valueOf(outPutForm);
+		fileExtension = jenaLangFileExtension.getValue();
+		System.console().printf("fileExtension is " + fileExtension + "\n"); // info
+
+		return fileExtension;
+	
+	}
+
+	/*
+	** what is state issue with static calls, in call chain?
+	*/
 	private static void createFileName(String fileName, Class<?> clazz, String outPutForm, String fileExtension) {
 		
-		fileName = fileName + clazz.getSimpleName() + "-" + outPutForm.toLowerCase() + fileExtension;
-		System.out.println("createFileName is " + fileName); // info
+		System.console().printf("** createFileName the fileExtension is " + fileExtension + "\n"); // info
+		fileName = fileName + clazz.getSimpleName() + "-" + outPutForm.toLowerCase() + "" + fileExtension;
+		System.console().printf("createFileName is " + fileName + "\n"); // info
 		
 	}
 	
+	private static void createFileName(String fileName, Class<?> clazz, String outPutForm) {
+		
+		String fileExtension = new String();
+		WriteToFileModel2 writeToFileModel2 = new WriteToFileModel2();
+		fileExtension = writeToFileModel2.getFileExtension(outPutForm);
+			//System.console().printf("*** fileExtension is " + fileExtension + "\n");
+		System.console().printf("** createFileName the fileExtension is " + fileExtension + "\n"); // info
+		fileName = fileName + clazz.getSimpleName() + "-" + outPutForm.toLowerCase() + "" + fileExtension;
+		System.console().printf("createFileName is " + fileName + "\n"); // info
+		
+	}
+	
+			
 	/*
 	** <todo: try java.nio.file >
 	** <todo: consider logging too! SLF4J & Logback, logging introduced time critical issues, >
