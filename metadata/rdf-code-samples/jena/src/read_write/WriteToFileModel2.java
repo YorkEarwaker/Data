@@ -16,7 +16,7 @@ import java.io.*;
 import java.lang.reflect.*;
 import java.util.*;
 
-import read_write.JenaLangFileExtension;
+//import read_write.JenaLangFileExtension;
 
 /*
 ** work in progress, writeToFile2
@@ -46,12 +46,21 @@ public class WriteToFileModel2 extends Object {
 	}
 	
 	/*
+	** Constructor
+	** <todo: constructor('s)>
+	*/
+	WriteToFileModel2 () {
+			
+	}
+	
+	/*
 	** set vcard-4.0 as ns in prefixMapping
 	*/
 	private static void manageJenaNsPrefixMapping(Model model) {
 		
 		showStatusNsPrefixMapping(model); // info
 		
+		// <todo: consider properties file (or read in csv, etc) for name space data>
 		String prefixName = "vcard-4.0";
 		String prefixUri = "http://www.w3.org/2006/vcard/ns#"; 
 		
@@ -122,6 +131,7 @@ public class WriteToFileModel2 extends Object {
 	*/
 	private static void populateModelWithVcardData(Model model) {
 		
+		// <todo: consider properties file (or csv file) for vcard data>
 		// some defnintions for VCARD4 
 		// https://www.w3.org/TR/vcard-rdf/
 		final String personURI	= "http://agw.org/citizen-scientist"; // URI string
@@ -171,6 +181,10 @@ public class WriteToFileModel2 extends Object {
 		// <todo: how to configure RDFDataMgr? with xmlbase for example. >
 		
 		//model.
+		
+		//RDFLanguages <todo: test of output type, or perhaps another enum of rdfformats to lang?>
+		// RDFLanguages.fileExtToLang(...)
+		// RDFLanguages.filenameToLang(...)
 
 		if (obj instanceof Lang) {
 			System.console().printf("Lang it is " + obj.toString()); // debug
@@ -194,12 +208,12 @@ public class WriteToFileModel2 extends Object {
 		
 		// <todo: cycle through RDFFormat and Lang >
 		Collection<String> constantsCollection = new ArrayList<String>(40);
-		//writeCollectionToFile(model, constantsCollection, RDFFormat.class);
+		writeCollectionToFile(model, constantsCollection, RDFFormat.class);
 
 		constantsCollection.clear();
 		System.console().printf("after clearing constantsCollection size is " + constantsCollection.size() + "\n");
 
-		//collectClassConstants(constantsCollection, Lang.class);
+		collectClassConstants(constantsCollection, Lang.class);
 		writeCollectionToFile(model, constantsCollection, Lang.class);
 		
 	}
@@ -209,30 +223,71 @@ public class WriteToFileModel2 extends Object {
 		collectClassConstants(constantsCollection, clazz);
 
 		// <todo: iterate about this, changing filename and output formats>
-		System.out.println(constantsCollection.isEmpty());
+		System.out.println("writeCollectionToFile constantsCollection is " + constantsCollection.isEmpty()); // debug
 		
-		String fileExtension = new String(""); // <todo: get from map?>
+		String fileExtension = new String(""); // to get from enum, 
 		String fileName = new String("vcard-4.0-");
 		WriteToFileModel2 writeToFileModel2 = new WriteToFileModel2();
+		
+		String className = clazz.getName();
+		Object theOutputFormInstance = null;
+		boolean hasReigsteredWriter = false;
 		
 		//Iterator iter = constantsCollection.iterator();
 		for (String outPutForm : constantsCollection) {
 			
-			System.console().printf("outPutForm is " + outPutForm + "\n");
+			fileExtension = "";
+			fileName = "vcard-4.0-";
+			hasReigsteredWriter = false;
+			theOutputFormInstance = null;
+			
+			if (className == Lang.class.getName()) {
+				
+				//<todo: try catch>
+				JenaLangInstance jenaLangInstance = JenaLangInstance.valueOf(outPutForm);
+				hasReigsteredWriter = RDFWriterRegistry.contains(jenaLangInstance.getValue());
+				theOutputFormInstance = jenaLangInstance.getValue();
+				
+				/* theOutputFormInstance = LangBuilder.create()
+					.langName("Lang." + outPutForm)
+					.build(); */
+			} else if (className == RDFFormat.class.getName()) {
+				
+				//<todo: try catch>
+				JenaRDFFormatInstance jenaRDFFormatInstance = JenaRDFFormatInstance.valueOf(outPutForm);
+				hasReigsteredWriter = RDFWriterRegistry.contains(jenaRDFFormatInstance.getValue());
+				theOutputFormInstance = jenaRDFFormatInstance.getValue();
+				
+				/* String classForNameArg = className + "." + outPutForm;
+				//theOutputFormInstance =  
+				try {
+					Class<?> t = Class.forName(classForNameArg);
+					
+					Class<?> theClassName = Class.forName(classForNameArg);
+					RDFFormat obj = (RDFFormat) theClassName.getDeclaredConstructor().newInstance();
+				} catch (ClassNotFoundException e) {
 
-			 // <todo: get the prefixName form model>
-			//String outPutForm = "RDFXML"; // constantsCollection.iterator().next().toLowerCase();
+				} */
+			} else {
+				// do something like throw an exception
+			}
+			
+			// do stuff to write is out if there is a registered RDF Writer
+			if (hasReigsteredWriter) {
+				
+			System.console().printf("outPutForm is " + outPutForm + "\n"); // debug
 			
 			fileExtension = writeToFileModel2.getFileExtension(outPutForm);
-			//getFileExtension(fileExtension, outPutForm);
 			//System.console().printf("*** fileExtension is " + fileExtension + "\n");
+			
 			// set the output directory and file
 			// java.io 
 			//fileName = "vcard-lang-turtle.ttl"; // name the output file p for preferred
-			createFileName(fileName, clazz, outPutForm, fileExtension);
-			//createFileName(fileName, clazz, outPutForm); // <todo: use four param version. issue with filename state.>
+			fileName = writeToFileModel2.createFileName(fileName, clazz, outPutForm, fileExtension);
+			
 			createFile(fileName); // create the output stream
-	
+			System.console().printf("*** fileName is " + fileName + "\n");
+				
 			// now write
 			// the preferred way to write RDF data
 			// provides many more formatting options
@@ -245,12 +300,15 @@ public class WriteToFileModel2 extends Object {
 			// example RDFDataMgr.write(System.out, model, Lang.RDFXML); // select RDFXML for comparison
 	
 			// print the vcard to the file
-			//printRdfGraphOut(model, outPutForm); // the preferred way to write output
+			printRdfGraphOut(model, theOutputFormInstance); // the preferred way to write output
 	
 			resetOutputStream();
 	
 			// print the vcard to the console
-			//printRdfGraphOut(model, outPutForm); // the preferred way to write output
+			printRdfGraphOut(model, theOutputFormInstance); // the preferred way to write output
+			
+			
+			}
 		}
 	}
 	
@@ -645,15 +703,40 @@ public class WriteToFileModel2 extends Object {
 	
 	}
 
+	/* 
+	** Another enum is required for RDFFormat to language.
+	** Not robust, needs logic for other inputs other than from values of Lang or RDFFormat
+	*/
 	private String getFileExtension(String outPutForm) {
 	
+		String fileExtension = new String();
+		String languageArgument = new String();
+		
+		/* RDFLanguages does not have, at current understanding, sufficient capability in Lang determination 
+		Lang langAsName = RDFLanguages.nameToLang(outPutForm);
+		Lang langAsRecource = RDFLanguages.resourceNameToLang(outPutForm);
 		// RDFLanguages.fileExtToLang(...)
 		// RDFLanguages.filenameToLang(...)
-		String fileExtension = new String();
-		//getFileExtension(fileExtension, outPutForm);
-		JenaLangFileExtension jenaLangFileExtension = JenaLangFileExtension.valueOf(outPutForm);
-		fileExtension = jenaLangFileExtension.getValue();
-		System.console().printf("fileExtension is " + fileExtension + "\n"); // info
+		*/
+		
+		// see if the value matches RDFFormat if it does then return the respective Lang from the enum.
+		// This might be a good test for default parsers and writers
+		try {
+			JenaRDFFormatLang jenaRDFFormatLang = JenaRDFFormatLang.valueOf(outPutForm);
+			languageArgument = jenaRDFFormatLang.getValue();
+		} catch (IllegalArgumentException e) {
+			System.console().printf("IllegalArgumentException jenaRDFFormatLang is " + e + "\n"); // info
+			languageArgument = outPutForm;
+		}
+		
+		// get the file extension from the enum.
+		try {
+			JenaLangFileExtension jenaLangFileExtension = JenaLangFileExtension.valueOf(languageArgument);
+			fileExtension = jenaLangFileExtension.getValue();
+			System.console().printf("JenaLangFileExtension is " + fileExtension + "\n"); // info
+		} catch (IllegalArgumentException e) {
+			System.console().printf("IllegalArgumentException jenaLangFileExtension is " + e + "\n"); // info
+		}
 
 		return fileExtension;
 	
@@ -662,15 +745,20 @@ public class WriteToFileModel2 extends Object {
 	/*
 	** what is state issue with static calls, in call chain?
 	*/
-	private static void createFileName(String fileName, Class<?> clazz, String outPutForm, String fileExtension) {
+	private String createFileName(String fileName, Class<?> clazz, String outPutForm, String fileExtension) {
 		
 		System.console().printf("** createFileName the fileExtension is " + fileExtension + "\n"); // info
 		fileName = fileName + clazz.getSimpleName() + "-" + outPutForm.toLowerCase() + "" + fileExtension;
 		System.console().printf("createFileName is " + fileName + "\n"); // info
 		
+		return fileName;
+		
 	}
 	
-	private static void createFileName(String fileName, Class<?> clazz, String outPutForm) {
+	/*
+	** <todo: delete this method? static call falling down.>
+	*/
+	private static void  createFileName(String fileName, Class<?> clazz, String outPutForm) {
 		
 		String fileExtension = new String();
 		WriteToFileModel2 writeToFileModel2 = new WriteToFileModel2();
@@ -679,6 +767,8 @@ public class WriteToFileModel2 extends Object {
 		System.console().printf("** createFileName the fileExtension is " + fileExtension + "\n"); // info
 		fileName = fileName + clazz.getSimpleName() + "-" + outPutForm.toLowerCase() + "" + fileExtension;
 		System.console().printf("createFileName is " + fileName + "\n"); // info
+		
+		//return fileName;
 		
 	}
 	
