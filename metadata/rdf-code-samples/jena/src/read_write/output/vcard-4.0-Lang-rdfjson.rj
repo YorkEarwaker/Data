@@ -1,0 +1,42 @@
+{ 
+  "http://agw.org/citizen-scientist" : { 
+    "http://www.w3.org/2006/vcard/ns#fn" : [ { 
+      "type" : "literal" ,
+      "value" : "Citizen Scientist"
+    }
+     ] ,
+    "http://www.w3.org/2006/vcard/ns#n" : [ { 
+      "type" : "bnode" ,
+      "value" : "_:53b57b92-4bc3-48ce-b613-ebbcc64baf32"
+    }
+     ] ,
+    "http://www.w3.org/2006/vcard/ns#organization-name" : [ { 
+      "type" : "literal" ,
+      "value" : "Anthropogenic Global Warming"
+    }
+     ] ,
+    "http://www.w3.org/2006/vcard/ns#nickname" : [ { 
+      "type" : "literal" ,
+      "value" : "Zensci"
+    }
+     ]
+  }
+   ,
+  "_:53b57b92-4bc3-48ce-b613-ebbcc64baf32" : { 
+    "http://www.w3.org/2006/vcard/ns#family-name" : [ { 
+      "type" : "literal" ,
+      "value" : "Scientist"
+    }
+     ] ,
+    "http://www.w3.org/2006/vcard/ns#given-name" : [ { 
+      "type" : "literal" ,
+      "value" : "Citizen"
+    }
+     ] ,
+    "http://www.w3.org/2006/vcard/ns#honorific-prefix" : [ { 
+      "type" : "literal" ,
+      "value" : "Mr"
+    }
+     ]
+  }
+}

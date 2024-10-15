@@ -1,0 +1,7 @@
+<http://agw.org/citizen-scientist> <http://www.w3.org/2006/vcard/ns#organization-name> "Anthropogenic Global Warming" .
+<http://agw.org/citizen-scientist> <http://www.w3.org/2006/vcard/ns#nickname> "Zensci" .
+<http://agw.org/citizen-scientist> <http://www.w3.org/2006/vcard/ns#n> _:B53b57b92X2D4bc3X2D48ceX2Db613X2Debbcc64baf32 .
+<http://agw.org/citizen-scientist> <http://www.w3.org/2006/vcard/ns#fn> "Citizen Scientist" .
+_:B53b57b92X2D4bc3X2D48ceX2Db613X2Debbcc64baf32 <http://www.w3.org/2006/vcard/ns#honorific-prefix> "Mr" .
+_:B53b57b92X2D4bc3X2D48ceX2Db613X2Debbcc64baf32 <http://www.w3.org/2006/vcard/ns#family-name> "Scientist" .
+_:B53b57b92X2D4bc3X2D48ceX2Db613X2Debbcc64baf32 <http://www.w3.org/2006/vcard/ns#given-name> "Citizen" .

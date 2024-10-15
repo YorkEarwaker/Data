@@ -1,0 +1,8 @@
+PREFIX vcard-4.0: <http://www.w3.org/2006/vcard/ns#>
+<http://agw.org/citizen-scientist> vcard-4.0:organization-name "Anthropogenic Global Warming" .
+<http://agw.org/citizen-scientist> vcard-4.0:nickname "Zensci" .
+<http://agw.org/citizen-scientist> vcard-4.0:n _:b0 .
+<http://agw.org/citizen-scientist> vcard-4.0:fn "Citizen Scientist" .
+_:b0 vcard-4.0:honorific-prefix "Mr" .
+_:b0 vcard-4.0:family-name "Scientist" .
+_:b0 vcard-4.0:given-name "Citizen" .

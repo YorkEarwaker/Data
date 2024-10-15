@@ -1,0 +1,39 @@
+<trix xmlns="http://www.w3.org/2004/03/trix/trix-1/">
+  <graph>
+    <triple>
+      <uri>http://agw.org/citizen-scientist</uri>
+      <uri>http://www.w3.org/2006/vcard/ns#organization-name</uri>
+      <plainLiteral>Anthropogenic Global Warming</plainLiteral>
+    </triple>
+    <triple>
+      <uri>http://agw.org/citizen-scientist</uri>
+      <uri>http://www.w3.org/2006/vcard/ns#nickname</uri>
+      <plainLiteral>Zensci</plainLiteral>
+    </triple>
+    <triple>
+      <uri>http://agw.org/citizen-scientist</uri>
+      <uri>http://www.w3.org/2006/vcard/ns#n</uri>
+      <id>53b57b92-4bc3-48ce-b613-ebbcc64baf32</id>
+    </triple>
+    <triple>
+      <uri>http://agw.org/citizen-scientist</uri>
+      <uri>http://www.w3.org/2006/vcard/ns#fn</uri>
+      <plainLiteral>Citizen Scientist</plainLiteral>
+    </triple>
+    <triple>
+      <id>53b57b92-4bc3-48ce-b613-ebbcc64baf32</id>
+      <uri>http://www.w3.org/2006/vcard/ns#honorific-prefix</uri>
+      <plainLiteral>Mr</plainLiteral>
+    </triple>
+    <triple>
+      <id>53b57b92-4bc3-48ce-b613-ebbcc64baf32</id>
+      <uri>http://www.w3.org/2006/vcard/ns#family-name</uri>
+      <plainLiteral>Scientist</plainLiteral>
+    </triple>
+    <triple>
+      <id>53b57b92-4bc3-48ce-b613-ebbcc64baf32</id>
+      <uri>http://www.w3.org/2006/vcard/ns#given-name</uri>
+      <plainLiteral>Citizen</plainLiteral>
+    </triple>
+  </graph>
+</trix>
