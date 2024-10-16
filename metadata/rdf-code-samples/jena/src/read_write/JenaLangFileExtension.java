@@ -56,25 +56,26 @@ package read_write;
 */
 public enum JenaLangFileExtension {
 	
+	//<todo: value as Set, therefore able to hold one or more elements, as unique file extensions set, >
 	// constructors
-	CSV (".csv"), // not listed Jena supported extension? // <todo: deal with this case>
+	CSV (".csv"),           // not listed Jena supported extension? // <todo: deal with this case>
 	JSONLD (".jsonld"), 
 	JSONLD11 (".jsonld11"), // not Jena supported extension // not listed Jena supported extension? // ???? will be unsupported after Jena5 // <todo: deal with this case>
-	N3 (".n3"), // .n3 is supported but only as a synonym for Turtle, from Jena I\O link above
+	N3 (".n3"),             // .n3 is supported but only as a synonym for Turtle, from Jena I\O link above
 	NQ (".nq"),
 	NQUADS (".nq"),
 	NT (".nt"),
 	NTRIPLES (".nt"),
 	RDFJSON (".rj"),
-	RDFNULL (".null"), // not Jena supported extension // not listed Jena supported extension? // <todo: deal with this case>
-	RDFPROTO (".pbrdf"), // also .rpb, // <todo: deal with this case>
-	RDFRAW (".raw"), // not Jena supported extension // not listed Jena supported extension? // <todo: deal with this case>
-	RDFTHRIFT (".trdf"), // also .rt, // <todo: deal with this case>
-	RDFXML (".rdf"), // also .owl, consider .rdfxml???, // <todo: deal with this case>
-	SHACLC (".shaclc"), // also .shc, https://jena.apache.org/documentation/shacl/ <todo: deal with this case>
+	RDFNULL (".null"),       // not Jena supported extension // not listed Jena supported extension? // <todo: deal with this case>
+	RDFPROTO (".pbrdf"),     // also .rpb, // <todo: deal with this case>
+	RDFRAW (".raw"),         // not Jena supported extension // not listed Jena supported extension? // <todo: deal with this case>
+	RDFTHRIFT (".trdf"),     // also .rt, // <todo: deal with this case>
+	RDFXML (".rdf"),         // also .owl, consider .rdfxml???, // <todo: deal with this case>
+	SHACLC (".shaclc"),      // also .shc, https://jena.apache.org/documentation/shacl/ <todo: deal with this case>
 	TRIG (".trig"), 
 	TRIX (".trix"),
-	TSV (".tsv"), // not listed Jena supported extension? // <todo: deal with this case>
+	TSV (".tsv"),            // not listed Jena supported extension? // <todo: deal with this case>
 	TTL (".ttl"), 
 	TURTLE (".ttl");
 	
@@ -89,9 +90,6 @@ public enum JenaLangFileExtension {
 		// return JenaLangFileExtension.valueOf(langFileExtention);
 	// }
 
-	// public JenaLangFileExtension getJenaLangFileExtension(String langFileExtention) {
-		// return JenaLangFileExtension.valueOf(langFileExtention);
-	// }
 
 	public String getValue() {
 		return(langFileExtention);

@@ -227,11 +227,12 @@ public class WriteToFileModel2 extends Object {
 		
 		String fileExtension = new String(""); // to get from enum, 
 		String fileName = new String("vcard-4.0-");
-		WriteToFileModel2 writeToFileModel2 = new WriteToFileModel2();
+		// required as static calls not working due to call stack variable state issue in state machine, 
+		WriteToFileModel2 writeToFileModel2 = new WriteToFileModel2(); 
 		
-		String className = clazz.getName();
-		Object theOutputFormInstance = null;
-		boolean hasReigsteredWriter = false;
+		String className = clazz.getName();  // get name of Lang/RDFFormat for conditional test 
+		Object theOutputFormInstance = null; // the Lang/RDFFormat variable to be passed to the RDFWriter
+		boolean hasReigsteredWriter = false; // whether a REFWriter is registred for Lang/RDFFormat value
 		
 		//Iterator iter = constantsCollection.iterator();
 		for (String outPutForm : constantsCollection) {
@@ -275,37 +276,37 @@ public class WriteToFileModel2 extends Object {
 			// do stuff to write is out if there is a registered RDF Writer
 			if (hasReigsteredWriter) {
 				
-			System.console().printf("outPutForm is " + outPutForm + "\n"); // debug
+				System.console().printf("outPutForm is " + outPutForm + "\n"); // debug
 			
-			fileExtension = writeToFileModel2.getFileExtension(outPutForm);
-			//System.console().printf("*** fileExtension is " + fileExtension + "\n");
+				fileExtension = writeToFileModel2.getFileExtension(outPutForm);
+				//System.console().printf("*** fileExtension is " + fileExtension + "\n");
 			
-			// set the output directory and file
-			// java.io 
-			//fileName = "vcard-lang-turtle.ttl"; // name the output file p for preferred
-			fileName = writeToFileModel2.createFileName(fileName, clazz, outPutForm, fileExtension);
+				// set the output directory and file
+				// java.io 
+				//fileName = "vcard-lang-turtle.ttl"; // name the output file p for preferred
+				fileName = writeToFileModel2.createFileName(fileName, clazz, outPutForm, fileExtension);
 			
-			createFile(fileName); // create the output stream
-			System.console().printf("*** fileName is " + fileName + "\n");
+				createFile(fileName); // create the output stream
+				System.console().printf("*** fileName is " + fileName + "\n");
 				
-			// now write
-			// the preferred way to write RDF data
-			// provides many more formatting options
-			// Apache Jen RIOT, 
-			// RDFDataMgr.write(OutputStream, Model, Lang) or 
-			// RDFDataMgr.write(OutputStream, Dataset, Lang)
-			// RDFDataMgr.write(OutputStream, Model, RDFFormat) or 
-			// RDFDataMgr.write(OutputStream, Dataset, RDFFormat)
-			// RIOT RDFFormat; TURTLE, NTRIPLES, JSONLD, RDFXML, RDFXML_PLAIN, N3, RDFJSON
-			// example RDFDataMgr.write(System.out, model, Lang.RDFXML); // select RDFXML for comparison
+				// now write
+				// the preferred way to write RDF data
+				// provides many more formatting options
+				// Apache Jen RIOT, 
+				// RDFDataMgr.write(OutputStream, Model, Lang) or 
+				// RDFDataMgr.write(OutputStream, Dataset, Lang)
+				// RDFDataMgr.write(OutputStream, Model, RDFFormat) or 
+				// RDFDataMgr.write(OutputStream, Dataset, RDFFormat)
+				// RIOT RDFFormat; TURTLE, NTRIPLES, JSONLD, RDFXML, RDFXML_PLAIN, N3, RDFJSON
+				// example RDFDataMgr.write(System.out, model, Lang.RDFXML); // select RDFXML for comparison
 	
-			// print the vcard to the file
-			printRdfGraphOut(model, theOutputFormInstance); // the preferred way to write output
+				// print the vcard to the file
+				printRdfGraphOut(model, theOutputFormInstance); // the preferred way to write output
+		
+				resetOutputStream(); // from file to console
 	
-			resetOutputStream();
-	
-			// print the vcard to the console
-			printRdfGraphOut(model, theOutputFormInstance); // the preferred way to write output
+				// print the vcard to the console
+				printRdfGraphOut(model, theOutputFormInstance); // the preferred way to write output
 			
 			
 			}
@@ -691,20 +692,8 @@ public class WriteToFileModel2 extends Object {
 	** static Lang                      TSV                  "TSV" - Used in various ways.
 	** static Lang                      TTL                  Alternative constant for TURTLE
 	** static Lang                      TURTLE               Turtle
-	*/
-	private static void getFileExtension(String fileExtension, String outPutForm) {
-	
-		// RDFLanguages.fileExtToLang(...)
-		// RDFLanguages.filenameToLang(...)
-	
-		JenaLangFileExtension jenaLangFileExtension = JenaLangFileExtension.valueOf(outPutForm);
-		fileExtension = jenaLangFileExtension.getValue();
-		System.console().printf("fileExtension is " + fileExtension + "\n"); // info
-	
-	}
-
-	/* 
-	** Another enum is required for RDFFormat to language.
+	** 
+	** Needs looking at again.
 	** Not robust, needs logic for other inputs other than from values of Lang or RDFFormat
 	*/
 	private String getFileExtension(String outPutForm) {
@@ -743,7 +732,7 @@ public class WriteToFileModel2 extends Object {
 	}
 
 	/*
-	** what is state issue with static calls, in call chain?
+	** Create the file name
 	*/
 	private String createFileName(String fileName, Class<?> clazz, String outPutForm, String fileExtension) {
 		
@@ -754,29 +743,14 @@ public class WriteToFileModel2 extends Object {
 		return fileName;
 		
 	}
-	
-	/*
-	** <todo: delete this method? static call falling down.>
-	*/
-	private static void  createFileName(String fileName, Class<?> clazz, String outPutForm) {
-		
-		String fileExtension = new String();
-		WriteToFileModel2 writeToFileModel2 = new WriteToFileModel2();
-		fileExtension = writeToFileModel2.getFileExtension(outPutForm);
-			//System.console().printf("*** fileExtension is " + fileExtension + "\n");
-		System.console().printf("** createFileName the fileExtension is " + fileExtension + "\n"); // info
-		fileName = fileName + clazz.getSimpleName() + "-" + outPutForm.toLowerCase() + "" + fileExtension;
-		System.console().printf("createFileName is " + fileName + "\n"); // info
-		
-		//return fileName;
-		
-	}
-	
 			
 	/*
 	** <todo: try java.nio.file >
 	** <todo: consider logging too! SLF4J & Logback, logging introduced time critical issues, >
 	** <todo: consider java time ciritcal lib like Javolution? no due dilligence yet! >
+	** static method fine here as no variable, like fileName, is changed where change is relevant
+	** to logic further up call stack chain. For example a change to parameter fileName here would not
+	** be recognised further up in the state machine call stack .
 	*/
 	private static void createFile(String fileName) {
 		

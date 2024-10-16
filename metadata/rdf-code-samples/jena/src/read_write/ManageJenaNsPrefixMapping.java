@@ -192,14 +192,14 @@ public class ManageJenaNsPrefixMapping extends Object {
 	private static void writeToFile(Model model) {
 		
 		String fileName = null; // instantiate, not necessary but polite
-		/* fileName = "vcard-ns-l.rdf"; // name of the output file, l for legacy
+		fileName = "vcard-ns-l.rdf"; // name of the output file, l for legacy
 		createFile(fileName); // create the output stream
 		
 		// now write the model in XML form to file
 		// the legacy way to write RDF data
 		// model.write()
 		// Jena writer name; "TURTLE", "TTL", "Turtle", "N-TRIPLES", "N-TRIPLE", "NT", "JSON-LD", "RDF/XML-ABBREV", "RDF/XML", "N3", "RDF/JSON"
-		model.write(System.out); // defaults to "RDF/XML" */
+		model.write(System.out); // defaults to "RDF/XML"
 		
 		// set the output directory and file
 		// java.io 

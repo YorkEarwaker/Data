@@ -86,46 +86,46 @@ public enum JenaRDFFormatInstance {
 	
 	// constructors
 	
-	JSONLD (RDFFormat.JSONLD),               // not listed Jena supported extension? // <todo: deal with this case>
-	JSONLD_FLAT (RDFFormat.JSONLD_FLAT),          // 
-	JSONLD_PLAIN (RDFFormat.JSONLD_PLAIN),         // 
-	JSONLD_PRETTY (RDFFormat.JSONLD_PRETTY),        // 
-	JSONLD11 (RDFFormat.JSONLD11),           // JSON LD 1.1 default form - multi-line JSON
-	JSONLD11_FLAT (RDFFormat.JSONLD11_FLAT),      // JSON LD 1.1 - single-line JSON
-	JSONLD11_PLAIN (RDFFormat.JSONLD11_PLAIN),     // JSON LD 1.1 - multi-line JSON
-	JSONLD11_PRETTY (RDFFormat.JSONLD11_PRETTY),    // JSON LD 1.1 - multi-line JSON - prefixes and native types.
-	NQ (RDFFormat.NQ),                       // N-Quads - RDF 1.1 form - UTF-8
-	NQUADS (RDFFormat.NQUADS),               // N-Quads - RDF 1.1 form - UTF-8
-	NQUADS_ASCII (RDFFormat.NQUADS_ASCII),         // N-Quads - Use ASCII
-	NQUADS_UTF8 (RDFFormat.NQUADS_UTF8),          // N-Quads in UTF-8
-	NT (RDFFormat.NT),                       // N-Triples - RDF 1.1 form - UTF-8
-	NTRIPLES (RDFFormat.NTRIPLES),           // N-Triples - RDF 1.1 form - UTF-8
-	NTRIPLES_ASCII (RDFFormat.NTRIPLES_ASCII),     // N-Triples - Use ASCII
-	NTRIPLES_UTF8 (RDFFormat.NTRIPLES_UTF8),      // N-Triples in UTF-8
-	RDF_PROTO (RDFFormat.RDF_PROTO),          // RDF Protobuf output.
+	JSONLD (RDFFormat.JSONLD),                       // not listed Jena supported extension? // <todo: deal with this case>
+	JSONLD_FLAT (RDFFormat.JSONLD_FLAT),             // 
+	JSONLD_PLAIN (RDFFormat.JSONLD_PLAIN),           // 
+	JSONLD_PRETTY (RDFFormat.JSONLD_PRETTY),         // 
+	JSONLD11 (RDFFormat.JSONLD11),                   // JSON LD 1.1 default form - multi-line JSON
+	JSONLD11_FLAT (RDFFormat.JSONLD11_FLAT),         // JSON LD 1.1 - single-line JSON
+	JSONLD11_PLAIN (RDFFormat.JSONLD11_PLAIN),       // JSON LD 1.1 - multi-line JSON
+	JSONLD11_PRETTY (RDFFormat.JSONLD11_PRETTY),     // JSON LD 1.1 - multi-line JSON - prefixes and native types.
+	NQ (RDFFormat.NQ),                               // N-Quads - RDF 1.1 form - UTF-8
+	NQUADS (RDFFormat.NQUADS),                       // N-Quads - RDF 1.1 form - UTF-8
+	NQUADS_ASCII (RDFFormat.NQUADS_ASCII),           // N-Quads - Use ASCII
+	NQUADS_UTF8 (RDFFormat.NQUADS_UTF8),             // N-Quads in UTF-8
+	NT (RDFFormat.NT),                               // N-Triples - RDF 1.1 form - UTF-8
+	NTRIPLES (RDFFormat.NTRIPLES),                   // N-Triples - RDF 1.1 form - UTF-8
+	NTRIPLES_ASCII (RDFFormat.NTRIPLES_ASCII),       // N-Triples - Use ASCII
+	NTRIPLES_UTF8 (RDFFormat.NTRIPLES_UTF8),         // N-Triples in UTF-8
+	RDF_PROTO (RDFFormat.RDF_PROTO),                 // RDF Protobuf output.
 	RDF_PROTO_VALUES (RDFFormat.RDF_PROTO_VALUES),   // A variant of an an RDFFormat that uses value encoding (e.g.
-	RDF_THRIFT (RDFFormat.RDF_THRIFT),        // RDF Thrift output.
+	RDF_THRIFT (RDFFormat.RDF_THRIFT),               // RDF Thrift output.
 	RDF_THRIFT_VALUES (RDFFormat.RDF_THRIFT_VALUES), // A variant of an an RDFFormat that uses value encoding (e.g.
-	RDFJSON (RDFFormat.RDFJSON),	         // 
-	RDFNULL (RDFFormat.RDFNULL),             // The "null" output format (a sink that prints nothing, usually quite efficiently)
-	RDFRAW (RDFFormat.RDFRAW),               // Stream-only output format for development - flushes every line.
-	RDFXML (RDFFormat.RDFXML),               // 
-	RDFXML_ABBREV (RDFFormat.RDFXML_ABBREV),        // 
-	RDFXML_PLAIN (RDFFormat.RDFXML_PLAIN),         // 
-	RDFXML_PRETTY (RDFFormat.RDFXML_PRETTY),        // 
-	SHACLC (RDFFormat.SHACLC),               // SHACL Compact Syntax
-	TRIG (RDFFormat.TRIG),                   // TriG - default form
-	TRIG_BLOCKS (RDFFormat.TRIG_BLOCKS),            // TriG - write in blocks of triples, with same subject, no nested object or RDF lists
-	TRIG_FLAT (RDFFormat.TRIG_FLAT),              // TriG - one line per triple
-	TRIG_LONG (RDFFormat.TRIG_LONG),              // TriG - with fixed indentation width and linebreaks after each sequence element
-	TRIG_PRETTY (RDFFormat.TRIG_PRETTY),            // TriG - pretty form
-	TRIX (RDFFormat.TRIX),	                 // 
-	TTL (RDFFormat.TTL),                     // Turtle - short name
-	TURTLE (RDFFormat.TURTLE),               // Turtle - default form
-	TURTLE_BLOCKS (RDFFormat.TURTLE_BLOCKS),        // Turtle - write in blocks of triples, with same subject, no nested object or RDF lists
-	TURTLE_FLAT (RDFFormat.TURTLE_FLAT),          // Turtle - one line per triple
-	TURTLE_LONG (RDFFormat.TURTLE_LONG),          // Turtle - with fixed indentation width and linebreaks after each sequence element
-	TURTLE_PRETTY (RDFFormat.TURTLE_PRETTY);        // Turtle - pretty form
+	RDFJSON (RDFFormat.RDFJSON),	                 // 
+	RDFNULL (RDFFormat.RDFNULL),                     // The "null" output format (a sink that prints nothing, usually quite efficiently)
+	RDFRAW (RDFFormat.RDFRAW),                       // Stream-only output format for development - flushes every line.
+	RDFXML (RDFFormat.RDFXML),                       // 
+	RDFXML_ABBREV (RDFFormat.RDFXML_ABBREV),         // 
+	RDFXML_PLAIN (RDFFormat.RDFXML_PLAIN),           // 
+	RDFXML_PRETTY (RDFFormat.RDFXML_PRETTY),         // 
+	SHACLC (RDFFormat.SHACLC),                       // SHACL Compact Syntax
+	TRIG (RDFFormat.TRIG),                           // TriG - default form
+	TRIG_BLOCKS (RDFFormat.TRIG_BLOCKS),             // TriG - write in blocks of triples, with same subject, no nested object or RDF lists
+	TRIG_FLAT (RDFFormat.TRIG_FLAT),                 // TriG - one line per triple
+	TRIG_LONG (RDFFormat.TRIG_LONG),                 // TriG - with fixed indentation width and linebreaks after each sequence element
+	TRIG_PRETTY (RDFFormat.TRIG_PRETTY),             // TriG - pretty form
+	TRIX (RDFFormat.TRIX),	                         // 
+	TTL (RDFFormat.TTL),                             // Turtle - short name
+	TURTLE (RDFFormat.TURTLE),                       // Turtle - default form
+	TURTLE_BLOCKS (RDFFormat.TURTLE_BLOCKS),         // Turtle - write in blocks of triples, with same subject, no nested object or RDF lists
+	TURTLE_FLAT (RDFFormat.TURTLE_FLAT),             // Turtle - one line per triple
+	TURTLE_LONG (RDFFormat.TURTLE_LONG),             // Turtle - with fixed indentation width and linebreaks after each sequence element
+	TURTLE_PRETTY (RDFFormat.TURTLE_PRETTY);         // Turtle - pretty form
 	
 	private final RDFFormat rdfFormatInstance;
 	

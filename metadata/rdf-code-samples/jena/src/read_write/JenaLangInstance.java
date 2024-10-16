@@ -51,32 +51,29 @@ import org.apache.jena.riot.Lang;
 	** https://javadoc.io/doc/org.apache.jena/jena-arq/latest/org.apache.jena.arq/org/apache/jena/riot/RDFLanguages.html
 	** retrieved 14:14, 12/10/2024 
 	** 
-	** <todo: find difinitive Jena file extension source for queries in enum, is there an internal repository class? where is it?>
-	** <todo: case where no Jena file extension has yet be found.>
-	** <todo: case where there is overloading with two or more file extensions for same language>
-	** <todo: a separte enum with other file extentions unrealated to file IO, query, comressed file, xml/xsd/..., other w3c, others, >
+	**
 */
 public enum JenaLangInstance {
 	
 	// constructors
-	CSV (Lang.CSV), // not listed Jena supported extension? // <todo: deal with this case>
+	CSV (Lang.CSV),             // no RDFWriter registered
 	JSONLD (Lang.JSONLD), 
-	JSONLD11 (Lang.JSONLD11), // not Jena supported extension // not listed Jena supported extension? // ???? will be unsupported after Jena5 // <todo: deal with this case>
-	N3 (Lang.N3), // .n3 is supported but only as a synonym for Turtle, from Jena I\O link above
+	JSONLD11 (Lang.JSONLD11),   // ???? will be unsupported after Jena5 // <todo: deal with this case>
+	N3 (Lang.N3),               // .n3 is supported but only as a synonym for Turtle, from Jena I\O link above
 	NQ (Lang.NQ),
 	NQUADS (Lang.NQUADS),
 	NT (Lang.NT),
 	NTRIPLES (Lang.NTRIPLES),
 	RDFJSON (Lang.RDFJSON),
-	RDFNULL (Lang.RDFNULL), // not Jena supported extension // not listed Jena supported extension? // <todo: deal with this case>
-	RDFPROTO (Lang.RDFPROTO), // also .rpb, // <todo: deal with this case>
-	RDFRAW (Lang.RDFRAW), // not Jena supported extension // not listed Jena supported extension? // <todo: deal with this case>
-	RDFTHRIFT (Lang.RDFTHRIFT), // also .rt, // <todo: deal with this case>
-	RDFXML (Lang.RDFXML), // also .owl, consider .rdfxml???, // <todo: deal with this case>
-	SHACLC (Lang.SHACLC), // also .shc, https://jena.apache.org/documentation/shacl/ <todo: deal with this case>
+	RDFNULL (Lang.RDFNULL),     // 
+	RDFPROTO (Lang.RDFPROTO),   // 
+	RDFRAW (Lang.RDFRAW),       // 
+	RDFTHRIFT (Lang.RDFTHRIFT), // 
+	RDFXML (Lang.RDFXML),       // 
+	SHACLC (Lang.SHACLC),       // 
 	TRIG (Lang.TRIG), 
 	TRIX (Lang.TRIX),
-	TSV (Lang.TSV), // not listed Jena supported extension? // <todo: deal with this case>
+	TSV (Lang.TSV),             // no RDFWriter registered
 	TTL (Lang.TTL), 
 	TURTLE (Lang.TURTLE);
 	

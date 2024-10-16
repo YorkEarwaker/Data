@@ -104,7 +104,7 @@ public enum JenaRDFFormatLang {
 	RDF_PROTO_VALUES ("RDFPROTO"),   // A variant of an an RDFFormat that uses value encoding (e.g.
 	RDF_THRIFT ("RDFTHRIFT"),        // RDF Thrift output.
 	RDF_THRIFT_VALUES ("RDFTHRIFT"), // A variant of an an RDFFormat that uses value encoding (e.g.
-	RDFJSON ("RDFJSON"),	         // 
+	RDFJSON ("RDFJSON"),	           // 
 	RDFNULL ("RDFNULL"),             // The "null" output format (a sink that prints nothing, usually quite efficiently)
 	RDFRAW ("RDFRAW"),               // Stream-only output format for development - flushes every line.
 	RDFXML ("RDFXML"),               // 
