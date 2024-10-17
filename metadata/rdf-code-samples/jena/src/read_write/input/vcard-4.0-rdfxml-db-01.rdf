@@ -1,0 +1,60 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:vcard-4.0="http://www.w3.org/2006/vcard/ns#">
+	
+  <rdf:Description rdf:about="http://agw.org/people/citizen-scientist">
+    <vcard-4.0:organization-name>Anthropogenic Global Warming</vcard-4.0:organization-name>
+    <vcard-4.0:nickname>Zensci</vcard-4.0:nickname>
+    <vcard-4.0:n rdf:parseType="Resource">
+      <vcard-4.0:honorific-prefix>Mr</vcard-4.0:honorific-prefix>
+      <vcard-4.0:family-name>Scientist</vcard-4.0:family-name>
+      <vcard-4.0:given-name>Citizen</vcard-4.0:given-name>
+    </vcard-4.0:n>
+    <vcard-4.0:fn>Citizen Scientist</vcard-4.0:fn>
+  </rdf:Description>
+  
+  <rdf:Description rdf:about="http://agw.org/people/citizen-developer">
+    <vcard-4.0:organization-name>Anthropogenic Global Warming</vcard-4.0:organization-name>
+    <vcard-4.0:nickname>Bitwise</vcard-4.0:nickname>
+    <vcard-4.0:n rdf:parseType="Resource">
+      <vcard-4.0:honorific-prefix>Mr</vcard-4.0:honorific-prefix>
+      <vcard-4.0:family-name>Developer</vcard-4.0:family-name>
+      <vcard-4.0:given-name>Citizen</vcard-4.0:given-name>
+    </vcard-4.0:n>
+    <vcard-4.0:fn>Citizen Developer</vcard-4.0:fn>
+  </rdf:Description>
+  
+  <rdf:Description rdf:about="http://agw.org/people/citizen-architect">
+    <vcard-4.0:organization-name>Anthropogenic Global Warming</vcard-4.0:organization-name>
+    <vcard-4.0:nickname>Arch</vcard-4.0:nickname>
+    <vcard-4.0:n rdf:parseType="Resource">
+      <vcard-4.0:honorific-prefix>Mr</vcard-4.0:honorific-prefix>
+      <vcard-4.0:family-name>Architect</vcard-4.0:family-name>
+      <vcard-4.0:given-name>Citizen</vcard-4.0:given-name>
+    </vcard-4.0:n>
+    <vcard-4.0:fn>Citizen Architect</vcard-4.0:fn>
+  </rdf:Description>
+  
+  <rdf:Description rdf:about="http://agw.org/people/citizen-communications-officer">
+    <vcard-4.0:organization-name>Anthropogenic Global Warming</vcard-4.0:organization-name>
+    <vcard-4.0:nickname>Tizzoff</vcard-4.0:nickname>
+    <vcard-4.0:n rdf:parseType="Resource">
+      <vcard-4.0:honorific-prefix>Mr</vcard-4.0:honorific-prefix>
+      <vcard-4.0:family-name>Communications Officer</vcard-4.0:family-name>
+      <vcard-4.0:given-name>Citizen</vcard-4.0:given-name>
+    </vcard-4.0:n>
+    <vcard-4.0:fn>Citizen Communications Officer</vcard-4.0:fn>
+  </rdf:Description>
+  
+  <rdf:Description rdf:about="http://agw.org/people/citizen-tea-executive">
+    <vcard-4.0:organization-name>Anthropogenic Global Warming</vcard-4.0:organization-name>
+    <vcard-4.0:nickname>Brewsup</vcard-4.0:nickname>
+    <vcard-4.0:n rdf:parseType="Resource">
+      <vcard-4.0:honorific-prefix>Mr</vcard-4.0:honorific-prefix>
+      <vcard-4.0:family-name>Tea Executive</vcard-4.0:family-name>
+      <vcard-4.0:given-name>Citizen</vcard-4.0:given-name>
+    </vcard-4.0:n>
+    <vcard-4.0:fn>Citizen Tea Executive</vcard-4.0:fn>
+  </rdf:Description>
+  
+</rdf:RDF>
