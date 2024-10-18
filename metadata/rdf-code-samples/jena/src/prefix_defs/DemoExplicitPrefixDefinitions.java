@@ -59,6 +59,9 @@ import org.apache.jena.rdf.model.*; // Resource, Property
 ** https://www.w3.org/wiki/UriSchemes
 ** retrieved 10:14 18/10/2024
 **
+** https://en.wikipedia.org/wiki/Punycode
+** retrieved 13:00 18/10/2024
+**
 ** ** **
 ** What are precise IRI form rules, in general strict, in Jena, for RDF
 ** Also related issue with IRI and Unicode normalization equavalent normal forms
@@ -83,6 +86,16 @@ public class DemoExplicitPrefixDefinitions extends Object {
 		
 		// namespace β
 		String nsB = "http://anthropogenicglobalwarming.org/thingkind/ns#"; 
+		
+		/* 
+		** **
+		** Troubleshooting todo's
+		** <todo: IRI Parsing before validation, parse with IRIImpl methods, >
+		** <todo: IRI Validation before handing off to Jean m.write for internal validation>
+		** is this a resource definition issue with # fragments? 
+		** is this a Prefix Mapping issue? 
+		** **
+		*/
 		
 		// create a resource in namespace α
 		//Resource radix = m.createResource( nsA + "radix" ); // root en, radix la, as a fragment
