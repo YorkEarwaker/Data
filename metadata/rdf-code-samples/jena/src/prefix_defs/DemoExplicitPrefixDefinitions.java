@@ -6,8 +6,13 @@ import org.apache.jena.rdf.model.*; // Resource, Property
 
 
 /*
+** Issues with org.apache.jena.irix.IRIException: Not an RDF IRI: <z>
+** IDE issue? Try in Eclipse perhaps the issue is VS Code related?
+** 
 ** Manage some explicit Prefix definitions
-** Use the Greek Alphabet (el) as bespoke namespaces
+** Consider; Cyrillic, Korean, Japanese, Chinese, other non ASCII? for IRI's .
+** First instance attempt to use non ASCII Greek Alphabet (el) as bespoke namespaces
+** Due to its continued use in mathematics and use of mathematics in hard sciences
 ** 
 ** Αα   Alpha     Νν    Nu
 ** Ββ   Beta      Ξξ	Xi
@@ -25,10 +30,46 @@ import org.apache.jena.rdf.model.*; // Resource, Property
 ** https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes
 ** retrieved 17/10/2024
 **
-** variabl names can't contain greek el letters. 
+** Java code. Separate issue from IRI's as strings.
+** Java variable names (can't? or) should avoid containg non ASCII characters? Like Greek el letters.
+** <todo: Find definitive source. Should Java code be ASCII compliant as best practice? apparently not but with significant caviats.>
+** <todo: What is the 'safe' Unicode charater set for Java code?>
+** Unicode normalization is done by Java on identifiers in Java code. The Java standard.
+** UTF-8 is often used to save Java source files. Cross tool set support, ide's, .... Third party integration of development and support environments, 
+** Code readability and maintainability is also an important issue with non standard character sets. NFR's the ilities. dev ops, dev SEC ops, security, interoperability, ...
 **
 ** https://jena.apache.org/documentation/notes/iri.html
 ** retrieved 18:15 17/10/2024 
+** 
+** https://en.wikipedia.org/wiki/Internationalized_Resource_Identifier
+** retrieved 09:27 18/10/2024
+**
+** https://datatracker.ietf.org/doc/html/rfc3987
+** retrieved 12:32 18/10/2024
+**
+** https://en.wikipedia.org/wiki/Unicode_equivalence#Normal_forms
+** retrieved 09:38 18/10/2024
+** 
+** https://unicode.org/reports/tr15/
+** retrieved 09:40 18/10/2024
+**
+** https://en.wikipedia.org/wiki/Percent-encoding
+** retrieved 09:46 18/10/2024
+**
+** https://www.w3.org/wiki/UriSchemes
+** retrieved 10:14 18/10/2024
+**
+** ** **
+** What are precise IRI form rules, in general strict, in Jena, for RDF
+** Also related issue with IRI and Unicode normalization equavalent normal forms
+** 
+** scheme:[//authority]path[?query][#fragment]
+**
+** scheme - about, file, http, ftp, irc, pop3, that is some URI type, see IANA scheme directory for comprehensive listing
+** authority - domain name / ip address
+** path - a relative path to a resource
+** query - an optional part which may contain paramaters as arguments to a web service, it is not part of the resource identification hierarchy (it is non hierarchical)
+** fragment - an optional part which can be used to locate specific parts of / within the resource / document 
 ** 
 */
 public class DemoExplicitPrefixDefinitions extends Object {
@@ -38,13 +79,14 @@ public class DemoExplicitPrefixDefinitions extends Object {
 		Model m = ModelFactory.createDefaultModel();
 		
 		// namespace α
-		String nsA = "http://agw/thing-kind#"; 
+		String nsA = "http://agw.org/thingkind/ns#"; 
 		
 		// namespace β
-		String nsB = "http://anthropogenicglobalwarming/thing-kind#"; 
+		String nsB = "http://anthropogenicglobalwarming.org/thingkind/ns#"; 
 		
 		// create a resource in namespace α
-		Resource radix = m.createResource( nsA + "radix" ); // root en, radix la
+		//Resource radix = m.createResource( nsA + "radix" ); // root en, radix la, as a fragment
+		Resource nonradix = m.createResource( nsA ); // with no fragment
 		
 		// create a property in namespace α - Alpha
 		Property P = m.createProperty( nsA + "P" );
@@ -62,7 +104,8 @@ public class DemoExplicitPrefixDefinitions extends Object {
 		Resource z = m.createResource( nsA = "z" );
 		
 		// chain some additions to the model together for brevity
-		m.add( radix, P, x ).add( radix, P, y ).add( y, Q, z );
+		//m.add( radix, P, x ).add( radix, P, y ).add( y, Q, z ); // with radix string as fragment
+		m.add( nonradix, P, x ).add( nonradix, P, y ).add( y, Q, z );
 		
 		// no bespoke prefixes have been added to the PrefixMapping
 		System.out.println( "# -- no special prefixes defined" );
