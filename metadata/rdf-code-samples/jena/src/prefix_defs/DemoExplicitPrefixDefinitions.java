@@ -4,14 +4,13 @@ package prefix_defs;
 import org.apache.jena.rdf.*; // Model
 import org.apache.jena.rdf.model.*; // Resource, Property
 
-
 /*
 ** Issues with org.apache.jena.irix.IRIException: Not an RDF IRI: <z>
 ** IDE issue? Try in Eclipse perhaps the issue is VS Code related?
 ** 
 ** Manage some explicit Prefix definitions
-** Consider; Cyrillic, Korean, Japanese, Chinese, other non ASCII? for IRI's .
-** First instance attempt to use non ASCII Greek Alphabet (el) as bespoke namespaces
+** Consider; Cyrillic (), Korean (), Japanese (), Chinese (zh), other non ASCII? for IRI's .
+** First instance attempt to use non ASCII Greek (el) Alphabet, as bespoke namespaces
 ** Due to its continued use in mathematics and use of mathematics in hard sciences
 ** 
 ** Αα   Alpha     Νν    Nu
@@ -27,8 +26,33 @@ import org.apache.jena.rdf.model.*; // Resource, Property
 ** Λλ   Lambda	  Ψψ    Psi
 ** Μμ   Mu        Ωω    Omega
 ** https://en.wikipedia.org/wiki/Greek_alphabet
+**
+** Two letter codes used for natural languages
 ** https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes
 ** retrieved 17/10/2024
+**
+** <todo: three letter codes for natural languages, ISO 639-2, now largly replace by 636-3 but refereneced widly in other standards like IEFT BCP 47>
+**
+** <todo: three letter codes for natural languages, ISO 639-3>
+**
+** Three letter codes used for natural language collections
+** https://en.wikipedia.org/wiki/List_of_ISO_639-5_codes
+** retrieved 10:33 19/10/2024
+**
+** Codes for the representation of scripts
+** https://en.wikipedia.org/wiki/ISO_15924
+** retrieved 10:49 19/10/2024
+**
+** Two letter codes used for countries
+** https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
+** retrieved 10:23 19/10/2024
+**
+** <todo: Three digit geographical region codes, for countries regions, UN M.49>
+**
+** IETF BCP 47 language tag - maintained by IANA language tag registry
+** Four letter internet language codes, an amalgum of ISO 639, ISO 15924, ISO 3166-1, UN M.49, 
+** https://en.wikipedia.org/wiki/IETF_language_tag
+** retrieved 10:53 19/10/2024
 **
 ** Java code. Separate issue from IRI's as strings.
 ** Java variable names (can't? or) should avoid containg non ASCII characters? Like Greek el letters.
@@ -68,7 +92,7 @@ import org.apache.jena.rdf.model.*; // Resource, Property
 ** 
 ** scheme:[//authority]path[?query][#fragment]
 **
-** scheme - about, file, http, ftp, irc, pop3, that is some URI type, see IANA scheme directory for comprehensive listing
+** scheme - about, file, http, ftp, irc, pop3, that is some URI type, see IANA scheme directory for comprehensive listing, many schemes are IETF standard proposals/recomendations
 ** authority - domain name / ip address
 ** path - a relative path to a resource
 ** query - an optional part which may contain paramaters as arguments to a web service, it is not part of the resource identification hierarchy (it is non hierarchical)
