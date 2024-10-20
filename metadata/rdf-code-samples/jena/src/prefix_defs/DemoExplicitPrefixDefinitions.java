@@ -198,6 +198,53 @@ public class DemoExplicitPrefixDefinitions extends Object {
 		// 
 		m.write( System.out );
 		
+		/*
+		exploreJeanIRIApproaches, in 
+		exploreJeanIRIApproaches, out 
+		# -- no special prefixes defined
+		<rdf:RDFException in thread "main" org.apache.jena.irix.IRIException: Not an RDF IRI: <z>
+        at org.apache.jena.irix.IRIs.reference(IRIs.java:43)
+        at org.apache.jena.irix.IRIs.checkEx(IRIs.java:63)
+        at org.apache.jena.rdfxml.xmloutput.impl.BaseXMLWriter.checkURI(BaseXMLWriter.java:844)
+        at org.apache.jena.rdfxml.xmloutput.impl.BaseXMLWriter.relativize(BaseXMLWriter.java:790)
+        at org.apache.jena.rdfxml.xmloutput.impl.Unparser.wURIreference(Unparser.java:922)
+        at org.apache.jena.rdfxml.xmloutput.impl.Unparser.wURIreference(Unparser.java:926)
+        at org.apache.jena.rdfxml.xmloutput.impl.Unparser.wResourceAttr(Unparser.java:988)
+        at org.apache.jena.rdfxml.xmloutput.impl.Unparser.wResourceNodeIDAttr(Unparser.java:962)
+        at org.apache.jena.rdfxml.xmloutput.impl.Unparser.wIdRefAttrOpt(Unparser.java:935)
+        at org.apache.jena.rdfxml.xmloutput.impl.Unparser.wPropertyEltCompact(Unparser.java:414)
+        at org.apache.jena.rdfxml.xmloutput.impl.Unparser.wPropertyElt(Unparser.java:381)
+        at org.apache.jena.rdfxml.xmloutput.impl.Unparser.wPropertyEltStar(Unparser.java:852)
+        at org.apache.jena.rdfxml.xmloutput.impl.Unparser.wTypedNodeOrDescriptionLong(Unparser.java:838)
+        at org.apache.jena.rdfxml.xmloutput.impl.Unparser.wTypedNodeOrDescription(Unparser.java:769)
+        at org.apache.jena.rdfxml.xmloutput.impl.Unparser.wDescription(Unparser.java:727)
+        at org.apache.jena.rdfxml.xmloutput.impl.Unparser.wObj(Unparser.java:683)
+        at org.apache.jena.rdfxml.xmloutput.impl.Unparser.wPropertyEltValueObj(Unparser.java:578)
+        at org.apache.jena.rdfxml.xmloutput.impl.Unparser.wPropertyEltValue(Unparser.java:523)
+        at org.apache.jena.rdfxml.xmloutput.impl.Unparser.wPropertyElt(Unparser.java:386)
+        at org.apache.jena.rdfxml.xmloutput.impl.Unparser.wPropertyEltStar(Unparser.java:852)
+        at org.apache.jena.rdfxml.xmloutput.impl.Unparser.wTypedNodeOrDescriptionLong(Unparser.java:838)
+        at org.apache.jena.rdfxml.xmloutput.impl.Unparser.wTypedNodeOrDescription(Unparser.java:769)
+        at org.apache.jena.rdfxml.xmloutput.impl.Unparser.wDescription(Unparser.java:727)
+        at org.apache.jena.rdfxml.xmloutput.impl.Unparser.wObj(Unparser.java:683)
+        at org.apache.jena.rdfxml.xmloutput.impl.Unparser.wObjStar(Unparser.java:359)
+        at org.apache.jena.rdfxml.xmloutput.impl.Unparser.wRDF(Unparser.java:340)
+        at org.apache.jena.rdfxml.xmloutput.impl.Unparser.write(Unparser.java:244)
+        at org.apache.jena.rdfxml.xmloutput.impl.RDFXML_Abbrev.writeBody(RDFXML_Abbrev.java:127)
+        at org.apache.jena.rdfxml.xmloutput.impl.BaseXMLWriter.writeXMLBody(BaseXMLWriter.java:471)
+        at org.apache.jena.rdfxml.xmloutput.impl.BaseXMLWriter.write(BaseXMLWriter.java:447)
+        at org.apache.jena.rdfxml.xmloutput.impl.BaseXMLWriter.write(BaseXMLWriter.java:434)
+        at org.apache.jena.riot.adapters.AdapterRDFWriter.write(AdapterRDFWriter.java:64)
+        at org.apache.jena.riot.RDFWriter.write$(RDFWriter.java:256)
+        at org.apache.jena.riot.RDFWriter.output(RDFWriter.java:215)
+        at org.apache.jena.riot.RDFWriter.output(RDFWriter.java:158)
+        at org.apache.jena.riot.RDFWriterBuilder.output(RDFWriterBuilder.java:207)
+        at org.apache.jena.riot.adapters.RDFWriterRIOT.write(RDFWriterRIOT.java:87)
+        at org.apache.jena.rdf.model.impl.ModelCom.write(ModelCom.java:243)
+        at prefix_defs.DemoExplicitPrefixDefinitions.demoJenaDocumentationExample(DemoExplicitPrefixDefinitions.java:180)
+        at prefix_defs.DemoExplicitPrefixDefinitions.main(DemoExplicitPrefixDefinitions.java:135)
+		*/
+		
 	}
 	
 	/* 
