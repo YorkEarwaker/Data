@@ -27,65 +27,88 @@ import org.apache.jena.rdf.model.*; // Resource, Property
 ** Μμ   Mu        Ωω    Omega
 ** https://en.wikipedia.org/wiki/Greek_alphabet
 **
-** Two letter codes used for natural languages
+** ISO 639-1 alpha, Two letter codes used for natural languages
 ** https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes
 ** retrieved 17/10/2024
 **
-** <todo: three letter codes for natural languages, ISO 639-2, now largly replace by 636-3 but refereneced widly in other standards like IEFT BCP 47>
+** <todo: ISO 639-2 alpah, three letter codes for natural languages, now largly replace by 636-3 but refereneced widly in other standards like IEFT BCP 47>
 **
-** <todo: three letter codes for natural languages, ISO 639-3>
+** <todo: ISO 639-3 alpha, three letter codes for natural languages, >
 **
-** Three letter codes used for natural language collections
+** ISO 639-5 alpha?, Three letter codes used for natural language collections
 ** https://en.wikipedia.org/wiki/List_of_ISO_639-5_codes
 ** retrieved 10:33 19/10/2024
 **
-** Codes for the representation of scripts
+** ISO 15924 alpha, Codes for the representation of scripts, writing systems, character sets and glyphs, 
 ** https://en.wikipedia.org/wiki/ISO_15924
 ** retrieved 10:49 19/10/2024
 **
-** Two letter codes used for countries
+** ISO 3166-1 alpha-2, Two letter codes used for countries
 ** https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
 ** retrieved 10:23 19/10/2024
 **
-** <todo: Three digit geographical region codes, for countries regions, UN M.49>
+** <todo: ISO 3166-1 alpha-3, Three letter codes for countries>
 **
-** IETF BCP 47 language tag - maintained by IANA language tag registry
+** ISO 3166-1 numeric, Three number codes use for countries and independent territories
+** https://en.wikipedia.org/wiki/ISO_3166-1_numeric
+** retrieved 10:13 20/10/2024
+**
+** UN M.49, Three digit geographical region codes, Standard Counrty or Area Codes for Statistical Use (Series M, No. 49),
+** https://en.wikipedia.org/wiki/UN_M49
+** retrieved 09:29 20/10/2024
+**
+** IETF BCP 47 language tag, - maintained by IANA language tag registry
 ** Four letter internet language codes, an amalgum of ISO 639, ISO 15924, ISO 3166-1, UN M.49, 
 ** https://en.wikipedia.org/wiki/IETF_language_tag
 ** retrieved 10:53 19/10/2024
 **
-** Java code. Separate issue from IRI's as strings.
+** <todo: CLDR, Common Locae Data Repository, Unicode, operating system and appliation, >
+**
+** Unicde
+** https://en.wikipedia.org/wiki/Unicode_equivalence#Normal_forms
+** retrieved 09:38 18/10/2024
+** 
+** Unicode
+** https://unicode.org/reports/tr15/
+** retrieved 09:40 18/10/2024
+**
+** <todo: URI/IRI authority, IDN International Domain Name, >
+**
+** IRI Jena, Very incomplete JDoc, Not much in user documentation either, 
+** https://jena.apache.org/documentation/notes/iri.html
+** retrieved 18:15 17/10/2024 
+** 
+** IRI overview, WP
+** https://en.wikipedia.org/wiki/Internationalized_Resource_Identifier
+** retrieved 09:27 18/10/2024
+**
+** IRI IETF RFC 3987, 
+** https://datatracker.ietf.org/doc/html/rfc3987
+** retrieved 12:32 18/10/2024
+**
+** <todo: URI IEFT RFC 3986, >
+**
+** URI/IRI
+** https://en.wikipedia.org/wiki/Percent-encoding
+** retrieved 09:46 18/10/2024
+**
+** URI/IRI scheme
+** https://www.w3.org/wiki/UriSchemes
+** retrieved 10:14 18/10/2024
+**
+** URI/IRI
+** https://en.wikipedia.org/wiki/Punycode
+** retrieved 13:00 18/10/2024
+**
+** ** **
+** Java code. Separate character encoding issue from IRI's. 
 ** Java variable names (can't? or) should avoid containg non ASCII characters? Like Greek el letters.
 ** <todo: Find definitive source. Should Java code be ASCII compliant as best practice? apparently not but with significant caviats.>
 ** <todo: What is the 'safe' Unicode charater set for Java code?>
 ** Unicode normalization is done by Java on identifiers in Java code. The Java standard.
 ** UTF-8 is often used to save Java source files. Cross tool set support, ide's, .... Third party integration of development and support environments, 
 ** Code readability and maintainability is also an important issue with non standard character sets. NFR's the ilities. dev ops, dev SEC ops, security, interoperability, ...
-**
-** https://jena.apache.org/documentation/notes/iri.html
-** retrieved 18:15 17/10/2024 
 ** 
-** https://en.wikipedia.org/wiki/Internationalized_Resource_Identifier
-** retrieved 09:27 18/10/2024
-**
-** https://datatracker.ietf.org/doc/html/rfc3987
-** retrieved 12:32 18/10/2024
-**
-** https://en.wikipedia.org/wiki/Unicode_equivalence#Normal_forms
-** retrieved 09:38 18/10/2024
-** 
-** https://unicode.org/reports/tr15/
-** retrieved 09:40 18/10/2024
-**
-** https://en.wikipedia.org/wiki/Percent-encoding
-** retrieved 09:46 18/10/2024
-**
-** https://www.w3.org/wiki/UriSchemes
-** retrieved 10:14 18/10/2024
-**
-** https://en.wikipedia.org/wiki/Punycode
-** retrieved 13:00 18/10/2024
-**
 ** ** **
 ** What are precise IRI form rules, in general strict, in Jena, for RDF
 ** Also related issue with IRI and Unicode normalization equavalent normal forms
@@ -103,23 +126,29 @@ public class DemoExplicitPrefixDefinitions extends Object {
 	
 	public static void main(String args[]) {
 		
-		Model m = ModelFactory.createDefaultModel();
+		Model model = ModelFactory.createDefaultModel();
+		
+		// Trouble shoot IRI issues from Jena docs example
+		exploreJeanIRIApproaches(model);
+		
+		// Jena user docs example
+		demoJenaDocumentationExample(model); // currently thows an iri exception
+	}
+	
+	/*
+	** From the Jena documentation with some minor changes for learning purposes
+	** Tried several changes to the Jean example code including URI/IRI string contents
+	** Likely something small causing the exception thrown but no idea at present what that might be.
+	** is this a resource definition issue with # fragments? 
+	** is this a Prefix Mapping issue? 
+	*/
+	private static void demoJenaDocumentationExample(Model m) {
 		
 		// namespace α
 		String nsA = "http://agw.org/thingkind/ns#"; 
 		
 		// namespace β
 		String nsB = "http://anthropogenicglobalwarming.org/thingkind/ns#"; 
-		
-		/* 
-		** **
-		** Troubleshooting todo's
-		** <todo: IRI Parsing before validation, parse with IRIImpl methods, >
-		** <todo: IRI Validation before handing off to Jean m.write for internal validation>
-		** is this a resource definition issue with # fragments? 
-		** is this a Prefix Mapping issue? 
-		** **
-		*/
 		
 		// create a resource in namespace α
 		//Resource radix = m.createResource( nsA + "radix" ); // root en, radix la, as a fragment
@@ -168,6 +197,42 @@ public class DemoExplicitPrefixDefinitions extends Object {
 		
 		// 
 		m.write( System.out );
+		
+	}
+	
+	/* 
+	** **
+	** Troubleshooting todo's, to explore IRI exception thrown in Jena example doc code
+	** see researh links above in class comments
+	** 
+	** IRIFactory, 
+	** IRI Construction base IRI or relative resoved to give absolute IRI, 
+	** IRI Validation against IRI URI specs, 
+	** Violations of specs, Must Should tatements from specs, 
+	** Minting Violations stricture for IRI created by Jena app as opposed to more lenient for those passed from elsehwere, 
+	**
+	** <todo: IRI Parsing before validation, parse with IRIImpl methods, >
+	** <todo: IRI Validation before handing off to Jean m.write for internal validation>
+	** **
+	** IRIFactory. Create IRIFactory instance
+	** IRI Classes. Construct IRI from string. Use factories create() or construct () methods.
+	** Viloation & ViolationCodes interfaces. Validate IRI against given standards, 
+	** 
+	** ** **
+	** IRIFactory.iriImplementation(); Jena IRI implmentation has stricter checking in line with IRI spec RFC 3987
+	** IRIFactory.uriImplementation(); Jena URI implementation has only US-ASCII checking in line with URI spec RFC 3986
+	** IRIFactory.semanticWebImplementation(); Jena Semantic Web implementation has conservative checking in line with applications for Semantic Web spec
+	** IRIFactory.jenaImplementation(); Jean implementation used only by the Jena team, 
+	** 
+	*/
+	private static void exploreJeanIRIApproaches(Model model) {
+		
+		System.out.println("exploreJeanIRIApproaches, in "); // debug
+		
+		// <todo: use Jena IRI code things here, likely several sub methods for different approaches>
+		// <todo: create an IRI that does not throw a - Not an RDF IRI - excpetion.>
+		
+		System.out.println("exploreJeanIRIApproaches, out "); // debug
 		
 	}
 	
