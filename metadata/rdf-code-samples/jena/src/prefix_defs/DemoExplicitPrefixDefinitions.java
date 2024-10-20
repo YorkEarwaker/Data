@@ -129,10 +129,10 @@ public class DemoExplicitPrefixDefinitions extends Object {
 		Model model = ModelFactory.createDefaultModel();
 		
 		// Trouble shoot IRI issues from Jena docs example
-		exploreJeanIRIApproaches(model);
+		exploreJenaIRIApproaches(model);
 		
 		// Jena user docs example
-		demoJenaDocumentationExample(model); // currently thows an iri exception
+		demoJenaDocumentationExample(model); // currently throws an IRI exception
 	}
 	
 	/*
@@ -143,6 +143,8 @@ public class DemoExplicitPrefixDefinitions extends Object {
 	** is this a Prefix Mapping issue? 
 	*/
 	private static void demoJenaDocumentationExample(Model m) {
+		
+		System.out.println("demoJenaDocumentationExample, in "); // debug
 		
 		// namespace α
 		String nsA = "http://agw.org/thingkind/ns#"; 
@@ -197,6 +199,8 @@ public class DemoExplicitPrefixDefinitions extends Object {
 		
 		// 
 		m.write( System.out );
+		
+		System.out.println("demoJenaDocumentationExample, out "); // debug
 		
 		/*
 		exploreJeanIRIApproaches, in 
@@ -272,14 +276,14 @@ public class DemoExplicitPrefixDefinitions extends Object {
 	** IRIFactory.jenaImplementation(); Jean implementation used only by the Jena team, 
 	** 
 	*/
-	private static void exploreJeanIRIApproaches(Model model) {
+	private static void exploreJenaIRIApproaches(Model model) {
 		
-		System.out.println("exploreJeanIRIApproaches, in "); // debug
+		System.out.println("exploreJenaIRIApproaches, in "); // debug
 		
 		// <todo: use Jena IRI code things here, likely several sub methods for different approaches>
 		// <todo: create an IRI that does not throw a - Not an RDF IRI - excpetion.>
 		
-		System.out.println("exploreJeanIRIApproaches, out "); // debug
+		System.out.println("exploreJenaIRIApproaches, out "); // debug
 		
 	}
 	
