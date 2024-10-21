@@ -13,14 +13,14 @@
 
 :: Set your cmd line java environment
 
-:: From Tomcat README
+:: From Tomcat RUNNING file
 ::
 ::   Windows:
 ::    set CATALINA_HOME=\path\to\apache-tomcat-[version]
 ::
-:: Successfully called with this env file
+:: Successfully called tomcat with this env file
 
-:: Set your cmd jena home
+:: Set your cmd tomcat home
 set CATALINA_HOME=C:\path\to\your\tomcat\apache-tomcat-10.1.31
 
 :: Set your java home
