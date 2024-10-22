@@ -17,6 +17,6 @@ Semantic Web and Linked Data things
 ...
 
 # setup a command line env for Jena
-my_jena_env.bat
+jena_env.bat
 
 <todo: what is the status of Apache Commons RDF?  in general? in Jena?>
