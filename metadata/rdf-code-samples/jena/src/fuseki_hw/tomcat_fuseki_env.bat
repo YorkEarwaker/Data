@@ -2,7 +2,8 @@
 
 :: Variable suggestions from tomcat RUNNING.txt file, says to call this file setenv.bat and place it in tomcat bin (not so far necessary.)
 ::
-:: FUSEKI_BASE :: todo point to a folder /etc that the war file can write to. also db can write to? write datasets too?
+:: FUSEKI_HOME
+:: FUSEKI_BASE :: defaults to /etc/fuseki tomcat, todo point to a folder /etc that the war file can write to. also db can write to? write datasets too?
 :: CATALINA_HOME :: done below
 :: CATALINA_BASE ::
 :: CATALINA_PID  :: process forks for tomcat
@@ -10,6 +11,14 @@
 :: CATALINA_TMPDIR :: 
 :: JRE_HOME :: 
 :: JAVA_OPTS :: command options
+
+:: https://jena.apache.org/documentation/fuseki2/fuseki-layout.html
+:: Service        FUSEKI_HOME   /usr/share/fuseki
+::                FUSEKI_BASE   /etc/fuseki
+:: Webapp         FUSEKI_HOME   N/A (Files in the Fuseki .war file)
+::                FUSEKI_BASE   /etc/fuseki
+:: Standalone     FUSEKI_HOME   Current directory
+::                FUSEKI_BASE   ${FUSEKI_HOME}/run/
 
 :: Set your cmd line java environment
 
