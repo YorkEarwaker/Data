@@ -13,3 +13,14 @@
 * https://jena.apache.org/documentation/fuseki2/fuseki-webapp.html
 * https://tomcat.apache.org/tomcat-10.1-doc/index.html
 
+* **
+* Stale links in documentation, non of these resolve
+* https://jena.apache.org/documentation/fuseki2/fuseki-configuration.html
+* ping -t jena.hpl.hp.com
+* Ping request could not find host jena.hpl.hp.com. Please check the name and try again.
+* http://jena.hpl.hp.com/2003/GenericRuleReasoner
+* http://jena.hpl.hp.com/2003/TransitiveReasoner
+* http://jena.hpl.hp.com/2003/RDFSExptRuleReasoner
+* http://jena.hpl.hp.com/2003/OWLFBRuleReasoner
+* http://jena.hpl.hp.com/2003/OWLMiniFBRuleReasoner
+
