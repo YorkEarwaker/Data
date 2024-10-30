@@ -1,0 +1,28 @@
+PREFIX vcard-4.0: <http://www.w3.org/2006/vcard/ns#>
+
+<http://agw.org/people/citizen-chemist>
+        vcard-4.0:fn                 "Citizen Chemist";
+        vcard-4.0:n                  [ vcard-4.0:family-name       "Chemist";
+                                       vcard-4.0:given-name        "Citizen";
+                                       vcard-4.0:honorific-prefix  "Mr"
+                                     ];
+        vcard-4.0:nickname           "ElMental";
+        vcard-4.0:organization-name  "Anthropogenic Global Warming" .
+		
+<http://agw.org/people/citizen-physicist>
+        vcard-4.0:fn                 "Citizen Physicist";
+        vcard-4.0:n                  [ vcard-4.0:family-name       "Physicist";
+                                       vcard-4.0:given-name        "Citizen";
+                                       vcard-4.0:honorific-prefix  "Mr"
+                                     ];
+        vcard-4.0:nickname           "Strange";
+        vcard-4.0:organization-name  "Anthropogenic Global Warming" .
+		
+<http://agw.org/people/citizen-biologist>
+        vcard-4.0:fn                 "Citizen Biologist";
+        vcard-4.0:n                  [ vcard-4.0:family-name       "Biologist";
+                                       vcard-4.0:given-name        "Citizen";
+                                       vcard-4.0:honorific-prefix  "Mr"
+                                     ];
+        vcard-4.0:nickname           "Fungi";
+        vcard-4.0:organization-name  "Anthropogenic Global Warming" .
