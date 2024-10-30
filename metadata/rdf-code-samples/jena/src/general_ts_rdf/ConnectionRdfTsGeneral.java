@@ -25,7 +25,7 @@ public class ConnectionRdfTsGeneral extends Object {
 		System.out.println("ConnectionRdfTsGeneral in ");
 		
 		// Comment out one or other instance to toggle coding style
-		makeRdfConnectionTsGeneral(CodeStyle.TRY_RESOURCE);
+		//makeRdfConnectionTsGeneral(CodeStyle.TRY_RESOURCE);
 		
 		makeRdfConnectionTsGeneral(CodeStyle.FUNCTIONAL);
 		
@@ -91,7 +91,7 @@ public class ConnectionRdfTsGeneral extends Object {
 		String dataInputPath = new String("src/general_ts_rdf/input/data.ttl");
 		
 		// this code section very similar to documentation example
-		// <todo: try RDFRemoteConnection instated!>
+		// <todo: try RDFRemoteConnection instead. >
 		try ( RDFConnection conn = RDFConnection.connect(schemeDomainPath) ) {
 			conn.load(dataInputPath);
 			conn.querySelect("SELECT DISTINCT ?s { ?s ?p ?o }", (qs) -> {
@@ -99,7 +99,7 @@ public class ConnectionRdfTsGeneral extends Object {
 				System.out.println( "Subject: " + subject ) ;
 			}) ;
 			
-		}
+		} // <todo: consider catch statement here? but no catch shown in documentation for this style, >
 		
 		System.out.println("makeRdfConnectionTsGenTryResource out "); // info, todo comment out
 		
@@ -182,6 +182,8 @@ public class ConnectionRdfTsGeneral extends Object {
 			
 		} catch (QueryException e) {
 			System.err.println("QueryException is " + e);
+		} catch (Exception e) {
+			System.err.println("Uknown Exception is " + e);
 		}
 		
 		System.out.println("makeRdfConnectionTsGenFunctional out "); // info, todo comment out
@@ -197,7 +199,7 @@ public class ConnectionRdfTsGeneral extends Object {
 		** makeRdfConnectionTsGeneral in 
 		** makeRdfConnectionTsGeneral codeStyle is FUNCTIONAL
 		** makeRdfConnectionTsGenFunctional in
-		** Exception is org.apache.jena.query.QueryException: Endpoint returned Content-Type: text/html which is not recognized for SELECT queries.
+		** QueryException is org.apache.jena.query.QueryException: Endpoint returned Content-Type: text/html which is not recognized for SELECT queries.
 		** Status code 200 OK, Method GET, Request Headers: {Accept=[application/sparql-results+json, application/sparql-results+xml;q=0.9, text/tab-separated-values;q=0.7, text/csv;q=0.5,application/json;q=0.2,application/xml;q=0.2,*\/*;q=0.1]}
 		** Body (extracted with charset UTF-8): <!DOCTYPE html>
 		** <!--
