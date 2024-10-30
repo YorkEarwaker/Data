@@ -49,8 +49,8 @@ public class WriteToFileModel2 extends Object {
 	** Constructor
 	** <todo: constructor('s)>
 	*/
-	WriteToFileModel2 () {
-			
+	public WriteToFileModel2 () {
+			// nothing to instantiate
 	}
 	
 	/*
