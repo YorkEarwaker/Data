@@ -1,7 +1,7 @@
 package general_ts_rdf;
 
 /*
-** Types of programming, coding, style
+** Types of programming, coding, style constants.
 */
 public enum CodeStyle {
 
