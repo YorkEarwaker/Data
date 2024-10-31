@@ -9,7 +9,8 @@ import org.apache.jena.rdfconnection.*;
 public class ConnectRdfTsFuseki extends Object {
 	
 	// make these top level static final constants available to all class methods?
-	static final String localWarFuseki = new String("http://localhost:8080/fuseki/#/dataset"); // Tomcat, up and running
+	//static final String localWarFuseki = new String("http://localhost:8080/fuseki/#/dataset"); // Tomcat, up and running
+	static final String localWarFuseki = new String("http://localhost:8080/fuseki/helloWorld"); // manually created in Fuseki UI
 	static final String localCmdFuseki = new String("http://localhost:3030/dataset"); // <todo: create cmdline local instance>
 	
 	public static void main(String arg[]) {
@@ -40,10 +41,11 @@ public class ConnectRdfTsFuseki extends Object {
 		String schemeDomainPath = localWarFuseki;
 		
 		try {
-			System.out.println("Stub <todo: create Fuseki specific rdf triple store connection implementation. > "); // info, todo reaplace
 			// 
 			RDFConnectionRemoteBuilder builder = RDFConnectionFuseki.create()
 				.destination(schemeDomainPath);
+				
+			System.out.println("Stub <todo: do something like load data or read data or both. > "); // info, todo reaplace
 		}
 		catch (Exception e) {
 			System.err.println("Exception is " + e);
