@@ -14,10 +14,7 @@ import org.apache.jena.rdf.model.Resource;
 */
 public class ConnectionRdfTsGeneral extends Object {
 	
-	// tried multiple different combination of path than show here, 
-	// <todo: consider test class for comprehensive path test, but would be deployment and environment dependent>
-	//static final String localWarFuseki = new String("http://localhost:8080/fuseki/#/dataset/helloWorld/query"); // org.apache.jena.query.QueryException: Endpoint returned Content-Type: text/html which is not recognized for SELECT queries.
-	static final String localWarFuseki = new String("http://localhost:8080/fuseki/#/dataset/helloWorld/query?force=true"); //?force=true, from varoius Stacktoverflow.com postings, still exception thrown
+	static final String localWarFuseki = new String("http://localhost:8080/fuseki/helloWorld"); // Success! helloWorld dataset had been created manually, <todo: create helloWorld programatically, >
 	static final String localCmdFuseki = new String("http://localhost:3030/dataset"); // <todo: create cmdline local instance>
 	
 	public static void main(String args[]) {
@@ -25,9 +22,9 @@ public class ConnectionRdfTsGeneral extends Object {
 		System.out.println("ConnectionRdfTsGeneral in ");
 		
 		// Comment out one or other instance to toggle coding style
-		//makeRdfConnectionTsGeneral(CodeStyle.TRY_RESOURCE);
+		makeRdfConnectionTsGeneral(CodeStyle.FUNCTIONAL); // success
 		
-		makeRdfConnectionTsGeneral(CodeStyle.FUNCTIONAL);
+		makeRdfConnectionTsGeneral(CodeStyle.TRY_RESOURCE); // success
 		
 		System.out.println("ConnectionRdfTsGeneral out ");
 		
@@ -73,22 +70,12 @@ public class ConnectionRdfTsGeneral extends Object {
 	** example of try resource style
 	** https://jena.apache.org/documentation/rdfconnection/
 	** 
-	** Remediation plan. 1.
-	** Command line instance of Fuseki,
-	** Create Fuseki configuration file e.g my_fuseki_config.ttl
-	** config file to specifically list RDF datasets
-	** config file to specify ; services, endpionts, datasets for this specific Fuseki instance.
-	** 
-	** Remdiation plan. 2.
-	** Create new .war file when this issue has been resolved.
-	** Include in new .war file configuration file
-	** and any other changes TBD requried.
 	*/ 
 	private static void makeRdfConnectionTsGenTryResource(String schemeDomainPath) {
 		
 		System.out.println("makeRdfConnectionTsGenTryResource in "); // info, todo comment out
 		
-		String dataInputPath = new String("src/general_ts_rdf/input/data.ttl");
+		String dataInputPath = new String("src/general_ts_rdf/input/data.ttl"); // science specialist data
 		
 		// this code section very similar to documentation example
 		// <todo: try RDFRemoteConnection instead. >
@@ -104,53 +91,29 @@ public class ConnectionRdfTsGeneral extends Object {
 		System.out.println("makeRdfConnectionTsGenTryResource out "); // info, todo comment out
 		
 		/*
-		** Currently returns Exception
-		** Likely cause default configuration of Fuseki .war file
-		** Poor documentation on end to end usage. That is not joined up.
+		** Success! 
+		** with schemeDomainPath = http://localhost:8080/fuseki/helloWorld
 		** 
-		** In exception stacktrace had to add and additional '\' to '*\/*;q=0.1]}' for this comment section.
-		** 
+		**
 		** ConnectionRdfTsGeneral in 
 		** makeRdfConnectionTsGeneral in 
 		** makeRdfConnectionTsGeneral codeStyle is TRY_RESOURCE
 		** makeRdfConnectionTsGenTryResource in
-		** Exception in thread "main" org.apache.jena.query.QueryException: Endpoint returned Content-Type: text/html which is not recognized for SELECT queries.
-		** Status code 200 OK, Method GET, Request Headers: {Accept=[application/sparql-results+json, application/sparql-results+xml;q=0.9, text/tab-separated-values;q=0.7, text/csv;q=0.5,application/json;q=0.2,application/xml;q=0.2,*\/*;q=0.1]}
-		** Body (extracted with charset UTF-8): <!DOCTYPE html>
-		** <!--
-		**    Licensed to the Apache Software Foundation (ASF) under one or more
-		**    contributor license agreements.  See the NOTICE file distributed with
-		**    this work for additional information regarding copyright ownership.
-		**    The ASF licenses this file to You under the Apache License, Version 2.0
-		**    (the "License"); you may not use this file except in compliance with
-		**    the License.  You may obtain a copy of the License at
-		** 
-		**        http://www.apache.org/licenses/LICENSE-2.0
-		** 
-		**    Unless required by applicable law or agreed to in writing, software
-		**    distributed under the License is distributed on an "AS IS" BASIS,
-		**    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-		**    See the License for the specific language governing permissions and
-		**    limitations under the License.
-		** -->
-		** <html lang="en">
-		**   <head>
-		**     <meta charset="utf-8">
-		**     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-		**     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		**     <l...
-		**         at org.apache.jena.sparql.exec.http.QueryExecHTTP.raiseException(QueryExecHTTP.java:488)
-		**         at org.apache.jena.sparql.exec.http.QueryExecHTTP.execRowSet(QueryExecHTTP.java:204)
-		**         at org.apache.jena.sparql.exec.http.QueryExecHTTP.select(QueryExecHTTP.java:164)
-		**         at org.apache.jena.sparql.exec.QueryExecutionAdapter.execSelect(QueryExecutionAdapter.java:108)
-		**         at org.apache.jena.sparql.exec.QueryExecutionCompat.execSelect(QueryExecutionCompat.java:95)
-		**         at org.apache.jena.rdfconnection.RDFConnection.lambda$querySelect$2(RDFConnection.java:223)
-		**         at org.apache.jena.system.Txn.exec(Txn.java:77)
-		**         at org.apache.jena.system.Txn.executeRead(Txn.java:115)
-		**         at org.apache.jena.rdfconnection.RDFConnection.querySelect(RDFConnection.java:221)
-		**         at general_ts_rdf.ConnectionRdfTsGeneral.makeRdfConnectionTsGenTryResource(ConnectionRdfTsGeneral.java:72)
-		**         at general_ts_rdf.ConnectionRdfTsGeneral.makeRdfConnectionTsGeneral(ConnectionRdfTsGeneral.java:49)
-		**         at general_ts_rdf.ConnectionRdfTsGeneral.main(ConnectionRdfTsGeneral.java:22)
+		** Subject: http://agw.org/people/citizen-candlestickmaker
+		** Subject: http://agw.org/people/citizen-biologist
+		** Subject: _:079933eeeb609d75a8ccb71c8d74dbec
+		** Subject: _:6e32fbf27742036946892c4c4e5d15ae
+		** Subject: _:f948f4913965874f7cfc2351e6e429af
+		** Subject: _:027cdee73e30eec6459afd1f581449a8
+		** Subject: http://agw.org/people/citizen-baker
+		** Subject: http://agw.org/people/citizen-physicist
+		** Subject: _:bc2c080cf360b9168867d50a3507267d
+		** Subject: _:241a5fef77671d8d1241eb0e8945fec0
+		** Subject: http://agw.org/people/citizen-chemist
+		** Subject: http://agw.org/people/citizen-butcher
+		** makeRdfConnectionTsGenTryResource out
+		** makeRdfConnectionTsGeneral out
+		** ConnectionRdfTsGeneral out
 		** 		
 		*/
 		
@@ -189,42 +152,21 @@ public class ConnectionRdfTsGeneral extends Object {
 		System.out.println("makeRdfConnectionTsGenFunctional out "); // info, todo comment out
 		
 		/*
-		** Currently returns Exception - note call stack is different for this style
-		** Likely cause default configuration of Fuseki .war file
-		** Poor documentation on end to end usage. That is not joined up.
+		** Success! 
+		** with schemeDomainPath = http://localhost:8080/fuseki/helloWorld
 		** 
-		** In exception stacktrace had to add and additional '\' to '*\/*;q=0.1]}' for this comment section.
 		**
 		** ConnectionRdfTsGeneral in 
 		** makeRdfConnectionTsGeneral in 
 		** makeRdfConnectionTsGeneral codeStyle is FUNCTIONAL
 		** makeRdfConnectionTsGenFunctional in
-		** QueryException is org.apache.jena.query.QueryException: Endpoint returned Content-Type: text/html which is not recognized for SELECT queries.
-		** Status code 200 OK, Method GET, Request Headers: {Accept=[application/sparql-results+json, application/sparql-results+xml;q=0.9, text/tab-separated-values;q=0.7, text/csv;q=0.5,application/json;q=0.2,application/xml;q=0.2,*\/*;q=0.1]}
-		** Body (extracted with charset UTF-8): <!DOCTYPE html>
-		** <!--
-		**    Licensed to the Apache Software Foundation (ASF) under one or more
-		**    contributor license agreements.  See the NOTICE file distributed with
-		**    this work for additional information regarding copyright ownership.
-		**    The ASF licenses this file to You under the Apache License, Version 2.0
-		**    (the "License"); you may not use this file except in compliance with
-		**    the License.  You may obtain a copy of the License at
-		** 
-		**        http://www.apache.org/licenses/LICENSE-2.0
-		** 
-		**    Unless required by applicable law or agreed to in writing, software
-		**    distributed under the License is distributed on an "AS IS" BASIS,
-		**    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-		**    See the License for the specific language governing permissions and
-		**    limitations under the License.
-		** -->
-		** <html lang="en">
-		**   <head>
-		**     <meta charset="utf-8">
-		**     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-		**     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		**     <l...
-		** makeRdfConnectionTsGenFunctional out 
+		** Subject: http://agw.org/people/citizen-candlestickmaker
+		** Subject: _:70d84bbb674ff1ba7daeeed860b2907d
+		** Subject: _:b0cebfb8f89fe69fa5c5f0654a16ec54
+		** Subject: http://agw.org/people/citizen-baker
+		** Subject: _:a63edf3e4647c23c418d26dce781680b
+		** Subject: http://agw.org/people/citizen-butcher
+		** makeRdfConnectionTsGenFunctional out
 		** makeRdfConnectionTsGeneral out
 		** ConnectionRdfTsGeneral out
 		*/
