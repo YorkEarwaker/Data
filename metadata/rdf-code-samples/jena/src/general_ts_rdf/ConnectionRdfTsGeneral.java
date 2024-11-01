@@ -14,8 +14,8 @@ import org.apache.jena.rdf.model.Resource;
 */
 public class ConnectionRdfTsGeneral extends Object {
 	
-	static final String localWarFuseki = new String("http://localhost:8080/fuseki/helloWorld"); // Success! helloWorld dataset had been created manually, <todo: create helloWorld programatically, >
-	static final String localCmdFuseki = new String("http://localhost:3030/dataset"); // <todo: create cmdline local instance>
+	static final String localWarFuseki = new String("http://localhost:8080/fuseki"); // Success! helloWorld dataset had been created manually, <todo: create helloWorld programatically, >
+	//static final String localCmdFuseki = new String("http://localhost:3030/dataset"); // assumed, not tested. <todo: create cmdline local instance>
 	
 	public static void main(String args[]) {
 		
@@ -48,7 +48,9 @@ public class ConnectionRdfTsGeneral extends Object {
 		
 		System.out.println("makeRdfConnectionTsGeneral codeStyle is " + codeStyle);
 		
-		String schemeDomainPath = localWarFuseki;
+		String schemeDomainPath = localWarFuseki; 
+		
+		//String dataSet = "/helloWorld";
 		
 		switch (codeStyle) {
 			case CodeStyle.FUNCTIONAL:
@@ -70,6 +72,7 @@ public class ConnectionRdfTsGeneral extends Object {
 	** example of try resource style
 	** https://jena.apache.org/documentation/rdfconnection/
 	** 
+	** <todo: add String dataSet as method parameter, >
 	*/ 
 	private static void makeRdfConnectionTsGenTryResource(String schemeDomainPath) {
 		
@@ -77,9 +80,11 @@ public class ConnectionRdfTsGeneral extends Object {
 		
 		String dataInputPath = new String("src/general_ts_rdf/input/data.ttl"); // science specialist data
 		
+		String dataSetUrl = schemeDomainPath + "/helloWorld"; // <todo: replace with dataSet argument>
+		
 		// this code section very similar to documentation example
 		// <todo: try RDFRemoteConnection instead. >
-		try ( RDFConnection conn = RDFConnection.connect(schemeDomainPath) ) {
+		try ( RDFConnection conn = RDFConnection.connect(dataSetUrl) ) {
 			conn.load(dataInputPath);
 			conn.querySelect("SELECT DISTINCT ?s { ?s ?p ?o }", (qs) -> {
 				Resource subject = qs.getResource("s") ;
@@ -121,17 +126,20 @@ public class ConnectionRdfTsGeneral extends Object {
 	
 	/*
 	** Functional style RDFConnection
+	** <todo: add String dataSet as method parameter, >
 	*/
 	private static void makeRdfConnectionTsGenFunctional(String schemeDomainPath) {
 		
 		System.out.println("makeRdfConnectionTsGenFunctional in "); // info, todo comment 
 		
 		String dataInputPath = new String("src/general_ts_rdf/input/data1.ttl"); // Rub a dub dub, data1
+		
+		String dataSetUrl = schemeDomainPath + "/helloWorld"; // <todo: replace with dataSet argument>
 
 		//System.out.println("Stub <todo: create functional general rdf triple store connection implementation. > ");
 		try {
 			
-			RDFConnection conn = RDFConnection.connect(schemeDomainPath) ;
+			RDFConnection conn = RDFConnection.connect(dataSetUrl) ;
 			conn.load(dataInputPath) ;
 			QueryExecution qExec = conn.query("SELECT DISTINCT ?s { ?s ?p ?o }") ;
 			ResultSet rs = qExec.execSelect() ;
@@ -172,5 +180,7 @@ public class ConnectionRdfTsGeneral extends Object {
 		*/
 		
 	}
+	
+	// https://www.emse.fr/~zimmermann/Teaching/SemWeb/session5.html <todo: something with geolocation as in this example>
 	
 }
