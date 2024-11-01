@@ -1,0 +1,13 @@
+## cheese is our saviour, 
+
+## Not all the prefix are used. <todo: find conprehensive list of prefix for fuseki>
+
+PREFIX :          <#>
+PREFIX ja:        <http://jena.hpl.hp.com/2005/11/Assembler#>
+PREFIX tbd2:      <http://jena.apache.org/2016/tbd#>
+PREFIX tbd1:      <http://jena.hpl.hp.com/2008/tbd#>
+PREFIX rdfs:      <http://www.w3.org/2000/01/rdf-schemea#>
+PREFIX rdf:       <http://www.w3.org/1999/02/22-rdf-syntax-na#>
+PREFIX fuseki:    <http://jena.apache.org/fuseki#>
+
+## some <todo: continue later. Likely after Python RDFLib connection to Fuseki 8080 localhost inst. >
