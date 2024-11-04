@@ -67,8 +67,8 @@ result = connection.query(query) # success!
 for s, p, o in result :
     print(f"subject {s, p, o}")
 
-# \x5cdebugpy\x5cadapter/../..\x5cdebugpy\x5clauncher' '51740' '--' 'C:\x5cUsers\x5cyorke\x5cDocuments\x5cdev\x5cexamples\x5cdata\x5cmetadata\x5crdf-code-samples\x5crdflib\x5cpersistence\x5cpersist_usage_fuseki.py' subject (rdflib.term.URIRef('http://agw.org/people/citizen-candlestickmaker'), rdflib.term
-# .URIRef('http://www.w3.org/2006/vcard/ns#fn'), rdflib.term.Literal('Citizen CandleStickMaker'))
+# \x5cdebugpy\x5cadapter/../..\x5cdebugpy\x5clauncher' '51740' '--' 'C:\x5cUsers\x5cyorke\x5cDocuments\x5cdev\x5cexamples\x5cdata\x5cmetadata\x5crdf-code-samples\x5crdflib\x5cpersistence\x5cpersist_usage_fuseki.py' 
+# subject (rdflib.term.URIRef('http://agw.org/people/citizen-candlestickmaker'), rdflib.term.URIRef('http://www.w3.org/2006/vcard/ns#fn'), rdflib.term.Literal('Citizen CandleStickMaker'))
 # subject (rdflib.term.URIRef('http://agw.org/people/citizen-candlestickmaker'), rdflib.term.URIRef('http://www.w3.org/2006/vcard/ns#organization-name'), rdflib.term.Literal('Anthropogenic Global Warming'))
 # subject (rdflib.term.URIRef('http://agw.org/people/citizen-candlestickmaker'), rdflib.term.URIRef('http://www.w3.org/2006/vcard/ns#nickname'), rdflib.term.Literal('Wicks'))        
 # subject (rdflib.term.URIRef('http://agw.org/people/citizen-candlestickmaker'), rdflib.term.URIRef('http://www.w3.org/2006/vcard/ns#n'), rdflib.term.BNode('b0'))
